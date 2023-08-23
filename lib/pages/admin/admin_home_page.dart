@@ -26,7 +26,7 @@ class _AdminHomePageState extends ConsumerState<AdminHomePage> {
       setState(() {
         isLoading = true;
       });
-      categoriesResponse = await ref.read(adminProvider).fetchCategories();
+      categoriesResponse = await ref.read(adminProvider).getCategories();
       setState(() {
         isLoading = false;
       });
@@ -58,7 +58,8 @@ class _AdminHomePageState extends ConsumerState<AdminHomePage> {
               style: const TextStyle(color: Colors.white, fontSize: 18),
             ),
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white),
+              icon:
+                  const Icon(Icons.arrow_back_ios_rounded, color: Colors.white),
               onPressed: () => Navigator.pop(context),
             ),
           ),

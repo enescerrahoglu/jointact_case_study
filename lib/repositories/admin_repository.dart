@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 
 class AdminRepository extends ChangeNotifier {
   String baseURL = 'https://api.jointact.com';
+  String devKey = '833F0ACB-49F7-451C-A0C7-1EA68FDC5B6B';
   List<CategoryModel> categoryList = [];
 
-  Future<ResponseModel> fetchCategories() async {
-    final url = Uri.parse('https://api.jointact.com/App/GetCategories');
+  Future<ResponseModel> getCategories() async {
+    final url = Uri.parse('$baseURL/App/GetCategories');
     final headers = {'Content-Type': 'application/json'};
-    final body = jsonEncode({'devKey': '833F0ACB-49F7-451C-A0C7-1EA68FDC5B6B'});
+    final body = jsonEncode({'devKey': devKey});
 
     final response = await http.post(url, headers: headers, body: body);
 
@@ -20,7 +21,7 @@ class AdminRepository extends ChangeNotifier {
       final responseModel = ResponseModel.fromJson(responseData);
       return responseModel;
     } else {
-      throw Exception('Failed to load categories');
+      throw Exception('Failed to load categories...');
     }
   }
 }
