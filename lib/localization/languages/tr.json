@@ -17,5 +17,15 @@
     "delete": "Sil",
     "please_fill_in_all_fields": "Lütfen bütün alanları doldurun!",
     "the_operation_is_successful": "İşlem başarılı.",
-    "something_went_wrong": "Bir hata oluştu!"
+    "something_went_wrong": "Bir hata oluştu!",
+    "ays_delete_category": "Kategoriyi silmek istediğinden emin misin?",
+    "yes": "Evet",
+    "no": "Hayır",
+    "product_name": "Ürün adı",
+    "description": "Açıklama",
+    "price": "Fiyat",
+    "category": "Kategori",
+    "product": "Ürün",
+    "image": "Görsel",
+    "video_url": "Video URL"
 }

@@ -6,6 +6,7 @@ import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/constants/string_constants.dart';
 import 'package:jointact_case_study/helpers/app_functions.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
+import 'package:jointact_case_study/models/category_model.dart';
 import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/admin_repository.dart';
 import 'package:jointact_case_study/widgets/loading_widget.dart';
@@ -68,7 +69,8 @@ class _CreateCategoryPageState extends ConsumerState<CreateCategoryPage> {
                       setState(() {
                         isLoading = true;
                       });
-                      await adminRepository.createCategory(textEditingController.text.trim()).then((response) {
+                      CategoryModel categoryModel = CategoryModel(id: 0, name: textEditingController.text.trim());
+                      await adminRepository.createCategory(categoryModel).then((response) {
                         if (response.isSuccessful) {
                           AppFunctions.showSnackbar(
                               context, getTranslated(context, StringKeys.theOperationIsSuccessful),

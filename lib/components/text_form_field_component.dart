@@ -30,6 +30,7 @@ class TextFormFieldComponent extends StatefulWidget {
   final int? maxLines;
   final int? maxCharacter;
   final Widget? suffixIcon;
+  final bool numbersOnly;
 
   const TextFormFieldComponent({
     Key? key,
@@ -61,6 +62,7 @@ class TextFormFieldComponent extends StatefulWidget {
     this.maxCharacter = 10000,
     this.prefixText,
     this.suffixIcon,
+    this.numbersOnly = false,
   }) : super(key: key);
 
   @override
@@ -73,10 +75,7 @@ class _TextFormFieldComponentState extends State<TextFormFieldComponent> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          top: widget.topPadding,
-          bottom: widget.bottomPadding,
-          right: widget.rightPadding,
-          left: widget.leftPadding),
+          top: widget.topPadding, bottom: widget.bottomPadding, right: widget.rightPadding, left: widget.leftPadding),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -114,6 +113,12 @@ class _TextFormFieldComponentState extends State<TextFormFieldComponent> {
           enabled: widget.enabled,
           inputFormatters: [
             LengthLimitingTextInputFormatter(widget.maxCharacter),
+            (widget.numbersOnly == true
+                ? FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+                : LengthLimitingTextInputFormatter(widget.maxCharacter)),
+            (widget.numbersOnly == true
+                ? FilteringTextInputFormatter.digitsOnly
+                : LengthLimitingTextInputFormatter(widget.maxCharacter)),
           ],
           decoration: InputDecoration(
             hintStyle: TextStyle(color: Colors.deepPurple.shade300),
@@ -133,18 +138,15 @@ class _TextFormFieldComponentState extends State<TextFormFieldComponent> {
             errorMaxLines: 3,
             prefixIcon: widget.iconData != null
                 ? Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 15),
+                    margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                     child: widget.iconData!,
                   )
                 : widget.prefixText != null
                     ? Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 15),
+                        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                         child: Text(
                           widget.prefixText!,
-                          style: const TextStyle(
-                              color: Colors.deepPurple, fontSize: 12),
+                          style: const TextStyle(color: Colors.deepPurple, fontSize: 12),
                         ),
                       )
                     : null,
@@ -162,12 +164,9 @@ class _TextFormFieldComponentState extends State<TextFormFieldComponent> {
                           });
                         },
                         child: Container(
-                          margin: const EdgeInsets.only(
-                              right: 10, top: 15, bottom: 15),
+                          margin: const EdgeInsets.only(right: 10, top: 15, bottom: 15),
                           child: Icon(
-                            isObscured
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                            isObscured ? Icons.visibility : Icons.visibility_off,
                             color: Colors.deepPurple,
                           ),
                         ),
