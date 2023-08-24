@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class CategoryModel {
   final int id;
-  final String name;
+  String name;
   CategoryModel({
     required this.id,
     required this.name,

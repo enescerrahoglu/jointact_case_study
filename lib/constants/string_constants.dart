@@ -13,7 +13,7 @@ class StringKeys {
   static String appLanguage = 'app_language';
   static String categoryName = 'category_name';
   static String add = 'add';
-  static String update = 'add';
+  static String update = 'update';
   static String delete = 'delete';
   static String pleaseFillInAllFields = 'please_fill_in_all_fields';
   static String theOperationIsSuccessful = 'the_operation_is_successful';
