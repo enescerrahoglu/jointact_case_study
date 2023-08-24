@@ -14,14 +14,45 @@ class AdminRepository extends ChangeNotifier {
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({'devKey': devKey});
 
-    final response = await http.post(url, headers: headers, body: body);
+    try {
+      categoryList.clear();
+      final response = await http.post(url, headers: headers, body: body);
+      if (response.statusCode == 200 && json.decode(response.body)["isSuccessful"] == true) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        final responseModel = ResponseModel.fromJson(responseData);
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> responseData = json.decode(response.body);
-      final responseModel = ResponseModel.fromJson(responseData);
-      return responseModel;
-    } else {
-      throw Exception('Failed to load categories...');
+        for (var categoryMap in responseModel.data["categories"]) {
+          categoryList.add(CategoryModel.fromMap(categoryMap));
+        }
+        notifyListeners();
+
+        return responseModel;
+      } else {
+        return ResponseModel.fromJson(json.decode(response.body));
+      }
+    } catch (e) {
+      debugPrint('Failed getCategories(): $e');
+      throw Exception([e]);
+    }
+  }
+
+  Future<ResponseModel> createCategory(String name) async {
+    final url = Uri.parse('$baseURL/App/CreateCategory');
+    final headers = {'Content-Type': 'application/json'};
+    final body = jsonEncode({'devKey': devKey, 'name': name});
+
+    try {
+      final response = await http.post(url, headers: headers, body: body);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        final responseModel = ResponseModel.fromJson(responseData);
+        return responseModel;
+      } else {
+        throw Exception('Failed createCategory()');
+      }
+    } catch (e) {
+      debugPrint('Failed createCategory(): $e');
+      throw Exception([e]);
     }
   }
 }

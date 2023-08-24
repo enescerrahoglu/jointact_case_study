@@ -68,11 +68,12 @@ class _RedirectPageState extends State<RedirectPage> {
                   ButtonComponent(
                     text: getTranslated(context, StringKeys.admin),
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const AdminHomePage(),
                         ),
+                        (route) => false,
                       );
                     },
                   ),

@@ -1,4 +1,21 @@
 {
     "admin": "Admin",
-    "customer": "Customer"
+    "customer": "Customer",
+    "create_category": "Create Category",
+    "update_category": "Update Category",
+    "delete_category": "Delete Category",
+    "create_product": "Create Product",
+    "update_product": "Update Product",
+    "delete_product": "Delete Product",
+    "categories": "Categories",
+    "products": "Products",
+    "settings": "Settings",
+    "app_language": "App Language",
+    "category_name": "Category name",
+    "add": "Add",
+    "update": "Update",
+    "delete": "Delete",
+    "please_fill_in_all_fields": "Please fill in all fields!",
+    "the_operation_is_successful": "The operation is successful.",
+    "something_went_wrong": "Something went wrong!"
 }

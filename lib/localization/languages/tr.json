@@ -1,4 +1,21 @@
 {
     "admin": "Yönetici",
-    "customer": "Müşteri"
+    "customer": "Müşteri",
+    "create_category": "Kategori Ekle",
+    "update_category": "Kategori Güncelle",
+    "delete_category": "Kategori Sil",
+    "create_product": "Ürün Ekle",
+    "update_product": "Ürün Güncelle",
+    "delete_product": "Ürün Sil",
+    "categories": "Kategoriler",
+    "products": "Ürünler",
+    "settings": "Ayarlar",
+    "app_language": "Uygulama Dili",
+    "category_name": "Kategori adı",
+    "add": "Ekle",
+    "update": "Güncelle",
+    "delete": "Sil",
+    "please_fill_in_all_fields": "Lütfen bütün alanları doldurun!",
+    "the_operation_is_successful": "İşlem başarılı.",
+    "something_went_wrong": "Bir hata oluştu!"
 }

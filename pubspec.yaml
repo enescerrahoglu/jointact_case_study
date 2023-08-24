@@ -39,6 +39,7 @@ dependencies:
   shared_preferences: ^2.1.1
   intl: ^0.18.0
   permission_handler: ^10.3.0
+  image_picker: ^0.8.8
   http: ^0.13.5
   url_launcher: ^6.1.11
   flutter_riverpod: ^2.3.6

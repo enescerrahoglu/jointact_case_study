@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class CategoryModel {
-  final String id;
+  final int id;
   final String name;
   CategoryModel({
     required this.id,
@@ -17,7 +17,7 @@ class CategoryModel {
 
   factory CategoryModel.fromMap(Map<String, dynamic> map) {
     return CategoryModel(
-      id: map['id'] as String,
+      id: map['id'] as int,
       name: map['name'] as String,
     );
   }
