@@ -64,16 +64,6 @@ class _CreateProductPageState extends ConsumerState<CreateProductPage> {
               icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white),
               onPressed: () => Navigator.pop(context),
             ),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    debugPrint(adminRepository.currencyList[selectedCurrencyIndex].id.toString());
-                  },
-                  icon: const Icon(
-                    Icons.check_circle_outline_rounded,
-                    color: Colors.white,
-                  ))
-            ],
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(10),

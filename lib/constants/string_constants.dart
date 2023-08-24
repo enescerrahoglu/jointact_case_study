@@ -19,6 +19,7 @@ class StringKeys {
   static String theOperationIsSuccessful = 'the_operation_is_successful';
   static String somethingWentWrong = 'something_went_wrong';
   static String aysDeleteCategory = 'ays_delete_category';
+  static String aysDeleteProduct = 'ays_delete_product';
   static String yes = 'yes';
   static String no = 'no';
   static String productName = 'product_name';

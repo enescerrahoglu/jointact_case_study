@@ -264,7 +264,7 @@ class AdminRepository extends ChangeNotifier {
         return ResponseModel.fromJson(json.decode(response.body));
       }
     } catch (e) {
-      debugPrint('Failed getProducts(): $e');
+      debugPrint('Failed getCurrencies(): $e');
       throw Exception([e]);
     }
   }
