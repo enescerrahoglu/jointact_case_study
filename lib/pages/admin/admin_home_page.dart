@@ -9,7 +9,7 @@ import 'package:jointact_case_study/helpers/app_functions.dart';
 import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
 import 'package:jointact_case_study/models/response_model.dart';
-import 'package:jointact_case_study/pages/admin/create_category_page.dart';
+import 'package:jointact_case_study/pages/admin/categories_page.dart';
 import 'package:jointact_case_study/pages/settings_page.dart';
 import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/admin_repository.dart';
@@ -251,14 +251,14 @@ class NavigationDrawer extends ConsumerWidget {
               shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
               leading: const Icon(Icons.category_rounded),
               title: Text(
-                getTranslated(context, StringKeys.createCategory),
+                getTranslated(context, StringKeys.categories),
                 style: const TextStyle(fontSize: 16),
               ),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const CreateCategoryPage(),
+                    builder: (context) => const CategoriesPage(),
                   ),
                 );
               },

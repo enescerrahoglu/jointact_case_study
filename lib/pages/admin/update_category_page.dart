@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,20 +7,30 @@ import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/constants/string_constants.dart';
 import 'package:jointact_case_study/helpers/app_functions.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
+import 'package:jointact_case_study/models/category_model.dart';
 import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/admin_repository.dart';
 import 'package:jointact_case_study/widgets/loading_widget.dart';
 
-class CreateCategoryPage extends ConsumerStatefulWidget {
-  const CreateCategoryPage({super.key});
+class UpdateCategoryPage extends ConsumerStatefulWidget {
+  const UpdateCategoryPage({super.key});
 
   @override
-  ConsumerState<CreateCategoryPage> createState() => _CreateCategoryPageState();
+  ConsumerState<UpdateCategoryPage> createState() => _UpdateCategoryPageState();
 }
 
-class _CreateCategoryPageState extends ConsumerState<CreateCategoryPage> {
+class _UpdateCategoryPageState extends ConsumerState<UpdateCategoryPage> {
   TextEditingController textEditingController = TextEditingController();
   bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (ref.read(adminProvider).selectedCategory != null) {
+      textEditingController.text = ref.read(adminProvider).selectedCategory!.name;
+    }
+  }
 
   @override
   void dispose() {
@@ -44,13 +55,42 @@ class _CreateCategoryPageState extends ConsumerState<CreateCategoryPage> {
             elevation: 0,
             backgroundColor: Colors.deepPurple,
             title: Text(
-              getTranslated(context, StringKeys.createCategory),
+              getTranslated(context, StringKeys.updateCategory),
               style: const TextStyle(color: Colors.white, fontSize: 18),
             ),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white),
               onPressed: () => Navigator.pop(context),
             ),
+            actions: [
+              IconButton(
+                onPressed: adminRepository.selectedCategory == null
+                    ? null
+                    : () async {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        await adminRepository.deleteCategory(adminRepository.selectedCategory!.id).then((response) {
+                          if (response.isSuccessful) {
+                            AppFunctions.showSnackbar(
+                                context, getTranslated(context, StringKeys.theOperationIsSuccessful),
+                                backgroundColor: successDark, icon: Icons.check_circle);
+                            Navigator.pop(context);
+                          } else {
+                            AppFunctions.showSnackbar(context, getTranslated(context, StringKeys.somethingWentWrong),
+                                backgroundColor: dangerDark, icon: Icons.cancel);
+                          }
+                        });
+                        setState(() {
+                          isLoading = false;
+                        });
+                      },
+                icon: const Icon(
+                  CupertinoIcons.delete_solid,
+                  color: Colors.redAccent,
+                ),
+              ),
+            ],
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(10),
@@ -64,11 +104,14 @@ class _CreateCategoryPageState extends ConsumerState<CreateCategoryPage> {
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () async {
-                    if (textEditingController.text.trim().isNotEmpty) {
+                    if (textEditingController.text.trim().isNotEmpty && adminRepository.selectedCategory != null) {
                       setState(() {
                         isLoading = true;
                       });
-                      await adminRepository.createCategory(textEditingController.text.trim()).then((response) {
+
+                      CategoryModel categoryModel = CategoryModel(
+                          id: adminRepository.selectedCategory!.id, name: textEditingController.text.trim());
+                      await adminRepository.updateCategory(categoryModel).then((response) {
                         if (response.isSuccessful) {
                           AppFunctions.showSnackbar(
                               context, getTranslated(context, StringKeys.theOperationIsSuccessful),
@@ -95,7 +138,7 @@ class _CreateCategoryPageState extends ConsumerState<CreateCategoryPage> {
                     ),
                   ),
                   child: Text(
-                    getTranslated(context, StringKeys.add),
+                    getTranslated(context, StringKeys.update),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
