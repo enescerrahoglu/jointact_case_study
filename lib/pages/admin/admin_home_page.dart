@@ -8,8 +8,8 @@ import 'package:jointact_case_study/constants/string_constants.dart';
 import 'package:jointact_case_study/helpers/app_functions.dart';
 import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
-import 'package:jointact_case_study/models/response_model.dart';
 import 'package:jointact_case_study/pages/admin/categories_page.dart';
+import 'package:jointact_case_study/pages/admin/products_page.dart';
 import 'package:jointact_case_study/pages/settings_page.dart';
 import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/admin_repository.dart';
@@ -24,7 +24,6 @@ class AdminHomePage extends ConsumerStatefulWidget {
 
 class _AdminHomePageState extends ConsumerState<AdminHomePage> {
   bool isLoading = false;
-  ResponseModel? categoriesResponse;
   int? selectedCategoryId;
 
   @override
@@ -35,7 +34,9 @@ class _AdminHomePageState extends ConsumerState<AdminHomePage> {
       setState(() {
         isLoading = true;
       });
-      categoriesResponse = await ref.read(adminProvider).getCategories();
+      await ref.read(adminProvider).getCategories();
+      await ref.read(adminProvider).getCurrencies();
+      await ref.read(adminProvider).getProducts();
       setState(() {
         isLoading = false;
       });
@@ -96,6 +97,20 @@ class _AdminHomePageState extends ConsumerState<AdminHomePage> {
                       backgroundColor: dangerDark, icon: Icons.cancel);
                 }
               });
+
+              await ref.read(adminProvider).getCurrencies().then((response) {
+                if (response.isSuccessful == false) {
+                  AppFunctions.showSnackbar(context, getTranslated(context, StringKeys.somethingWentWrong),
+                      backgroundColor: dangerDark, icon: Icons.cancel);
+                }
+              });
+
+              await ref.read(adminProvider).getProducts().then((response) {
+                if (response.isSuccessful == false) {
+                  AppFunctions.showSnackbar(context, getTranslated(context, StringKeys.somethingWentWrong),
+                      backgroundColor: dangerDark, icon: Icons.cancel);
+                }
+              });
               setState(() {
                 isLoading = false;
               });
@@ -105,7 +120,6 @@ class _AdminHomePageState extends ConsumerState<AdminHomePage> {
               children: [
                 Column(
                   children: [
-                    const SizedBox(height: 10),
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -259,6 +273,22 @@ class NavigationDrawer extends ConsumerWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const CategoriesPage(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+              leading: const Icon(Icons.auto_awesome_mosaic_rounded),
+              title: Text(
+                getTranslated(context, StringKeys.products),
+                style: const TextStyle(fontSize: 16),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProductsPage(),
                   ),
                 );
               },

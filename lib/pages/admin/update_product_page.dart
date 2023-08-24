@@ -12,14 +12,14 @@ import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/admin_repository.dart';
 import 'package:jointact_case_study/widgets/loading_widget.dart';
 
-class UpdateCategoryPage extends ConsumerStatefulWidget {
-  const UpdateCategoryPage({super.key});
+class UpdateProductPage extends ConsumerStatefulWidget {
+  const UpdateProductPage({super.key});
 
   @override
-  ConsumerState<UpdateCategoryPage> createState() => _UpdateCategoryPageState();
+  ConsumerState<UpdateProductPage> createState() => _UpdateProductPageState();
 }
 
-class _UpdateCategoryPageState extends ConsumerState<UpdateCategoryPage> {
+class _UpdateProductPageState extends ConsumerState<UpdateProductPage> {
   TextEditingController textEditingController = TextEditingController();
   bool isLoading = false;
 
@@ -55,7 +55,7 @@ class _UpdateCategoryPageState extends ConsumerState<UpdateCategoryPage> {
             elevation: 0,
             backgroundColor: Colors.deepPurple,
             title: Text(
-              getTranslated(context, StringKeys.updateCategory),
+              getTranslated(context, StringKeys.updateProduct),
               style: const TextStyle(color: Colors.white, fontSize: 18),
             ),
             leading: IconButton(
@@ -119,9 +119,9 @@ class _UpdateCategoryPageState extends ConsumerState<UpdateCategoryPage> {
                           },
                         );
                       },
-                icon: Icon(
+                icon: const Icon(
                   CupertinoIcons.delete_solid,
-                  color: Colors.red.shade100,
+                  color: Colors.white,
                 ),
               ),
             ],
@@ -177,6 +177,30 @@ class _UpdateCategoryPageState extends ConsumerState<UpdateCategoryPage> {
                   ),
                   child: Text(
                     getTranslated(context, StringKeys.update),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () async {
+                    setState(() {
+                      adminRepository.selectedCategory = null;
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: dangerDark,
+                    backgroundColor: Colors.red.shade100,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    minimumSize: const Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text(
+                    getTranslated(context, StringKeys.delete),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,

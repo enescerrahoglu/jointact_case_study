@@ -10,8 +10,7 @@ class AppFunctions {
       {Color? backgroundColor, IconData? icon, int duration = 2}) {
     final snackbar = SnackBar(
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(10), topLeft: Radius.circular(10)),
+        borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
       ),
       content: Row(
         children: [
@@ -31,9 +30,7 @@ class AppFunctions {
         ],
       ),
       behavior: SnackBarBehavior.fixed,
-      backgroundColor: backgroundColor != null
-          ? backgroundColor.withOpacity(1)
-          : Colors.grey.withOpacity(1),
+      backgroundColor: backgroundColor != null ? backgroundColor.withOpacity(1) : Colors.grey.withOpacity(1),
       duration: Duration(seconds: duration),
     );
 
@@ -42,37 +39,10 @@ class AppFunctions {
       ..showSnackBar(snackbar);
   }
 
-  showProgressDialog(BuildContext context) {
-    AlertDialog alert = const AlertDialog(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      content: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CircularProgressIndicator(),
-          )
-        ],
-      ),
-    );
-    showDialog(
-      barrierDismissible: false,
-      barrierColor: Colors.black.withOpacity(0.7),
-      context: context,
-      builder: (context) {
-        return WillPopScope(onWillPop: () async => false, child: alert);
-      },
-    );
-  }
-
-  void showMediaSnackbar(
-      BuildContext context, Function cameraFunction, Function galleryFunction) {
+  void showMediaSnackbar(BuildContext context, Function cameraFunction, Function galleryFunction) {
     final snackbar = SnackBar(
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       ),
       content: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -124,12 +94,11 @@ class AppFunctions {
   Future<File?> pickImageFromGallery() async {
     try {
       PermissionStatus permissionStatus = PermissionStatus.denied;
-      await Permission.photos.request();
-      permissionStatus = await Permission.photos.status;
+      await Permission.storage.request();
+      permissionStatus = await Permission.storage.status;
       if (permissionStatus.isGranted) {
         try {
-          final image = await ImagePicker().pickImage(
-              source: ImageSource.gallery, imageQuality: 100, maxWidth: 1920);
+          final image = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 100, maxWidth: 1920);
           if (image == null) return null;
           final imageTemp = File(image.path);
           return imageTemp;
@@ -150,8 +119,7 @@ class AppFunctions {
       var permissionStatus = await Permission.camera.status;
       if (permissionStatus.isGranted) {
         try {
-          final image = await ImagePicker().pickImage(
-              source: ImageSource.camera, imageQuality: 100, maxWidth: 1920);
+          final image = await ImagePicker().pickImage(source: ImageSource.camera, imageQuality: 100, maxWidth: 1920);
           if (image == null) return null;
           final imageTemp = File(image.path);
           return imageTemp;

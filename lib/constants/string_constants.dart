@@ -18,4 +18,14 @@ class StringKeys {
   static String pleaseFillInAllFields = 'please_fill_in_all_fields';
   static String theOperationIsSuccessful = 'the_operation_is_successful';
   static String somethingWentWrong = 'something_went_wrong';
+  static String aysDeleteCategory = 'ays_delete_category';
+  static String yes = 'yes';
+  static String no = 'no';
+  static String productName = 'product_name';
+  static String description = 'description';
+  static String price = 'price';
+  static String category = 'category';
+  static String product = 'product';
+  static String image = 'image';
+  static String videoUrl = 'video_url';
 }

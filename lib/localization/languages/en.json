@@ -17,5 +17,15 @@
     "delete": "Delete",
     "please_fill_in_all_fields": "Please fill in all fields!",
     "the_operation_is_successful": "The operation is successful.",
-    "something_went_wrong": "Something went wrong!"
+    "something_went_wrong": "Something went wrong!",
+    "ays_delete_category": "Are you sure you want to delete the category?",
+    "yes": "Yes",
+    "no": "No",
+    "product_name": "Product name",
+    "description": "Description",
+    "price": "Price",
+    "category": "Category",
+    "product": "Product",
+    "image": "Image",
+    "video_url": "Video URL"
 }
