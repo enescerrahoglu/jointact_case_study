@@ -71,6 +71,8 @@ class _UpdateCategoryPageState extends ConsumerState<UpdateCategoryPage> {
                           context: context,
                           builder: (builderContext) {
                             return AlertDialog(
+                              actionsPadding: const EdgeInsets.only(bottom: 10, right: 10),
+                              titlePadding: const EdgeInsets.only(bottom: 10, right: 20, left: 20, top: 20),
                               scrollable: true,
                               actionsAlignment: MainAxisAlignment.end,
                               title: Text(getTranslated(context, StringKeys.aysDeleteCategory)),
@@ -134,6 +136,7 @@ class _UpdateCategoryPageState extends ConsumerState<UpdateCategoryPage> {
                   hintText: getTranslated(context, StringKeys.categoryName),
                   context: context,
                   textEditingController: textEditingController,
+                  textCapitalization: TextCapitalization.words,
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(

@@ -43,8 +43,10 @@ class _UpdateProductPageState extends ConsumerState<UpdateProductPage> {
       priceTextEditingController.text = productModel.price.toString();
       videoUrlTextEditingController.text = productModel.productVideoLink;
       selectedCategoryId = productModel.categoryId;
-      selectedCurrencyIndex = ref.read(adminProvider).currencyList.indexOf(
-          ref.read(adminProvider).currencyList.where((element) => element.id == productModel.currencyId).first);
+      if (ref.read(adminProvider).currencyList.isNotEmpty) {
+        selectedCurrencyIndex = ref.read(adminProvider).currencyList.indexOf(
+            ref.read(adminProvider).currencyList.where((element) => element.id == productModel.currencyId).first);
+      }
       _base64Image = productModel.imageBase64;
     }
   }
@@ -91,6 +93,8 @@ class _UpdateProductPageState extends ConsumerState<UpdateProductPage> {
                           context: context,
                           builder: (builderContext) {
                             return AlertDialog(
+                              actionsPadding: const EdgeInsets.only(bottom: 10, right: 10),
+                              titlePadding: const EdgeInsets.only(bottom: 10, right: 20, left: 20, top: 20),
                               scrollable: true,
                               actionsAlignment: MainAxisAlignment.end,
                               title: Text(getTranslated(context, StringKeys.aysDeleteProduct)),
@@ -156,98 +160,112 @@ class _UpdateProductPageState extends ConsumerState<UpdateProductPage> {
                   hintText: getTranslated(context, StringKeys.productName),
                   context: context,
                   textEditingController: nameTextEditingController,
+                  textCapitalization: TextCapitalization.words,
                 ),
                 const SizedBox(height: 10),
                 TextFormFieldComponent(
                   hintText: getTranslated(context, StringKeys.description),
                   context: context,
                   textEditingController: descriptionTextEditingController,
+                  textCapitalization: TextCapitalization.sentences,
                 ),
-                const SizedBox(height: 10),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 5,
-                        offset: const Offset(0, 1),
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: DropdownButton<int>(
-                      value: selectedCategoryId,
-                      onChanged: (int? newValue) {
-                        setState(() {
-                          selectedCategoryId = newValue;
-                        });
-                      },
-                      autofocus: true,
-                      items: adminRepository.categoryList.map((category) {
-                        return getDropdownItem(category.name, category.id);
-                      }).toList(),
-                      selectedItemBuilder: (context) {
-                        return adminRepository.categoryList.map((category) {
-                          return getDropdownSelectedItem(category.name);
-                        }).toList();
-                      },
-                      underline: Container(),
-                      iconEnabledColor: hintTextColor,
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      isExpanded: true,
-                      icon: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.arrow_drop_down_circle_outlined,
-                          color: primaryColor,
-                        ),
-                      ),
-                      hint: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            getTranslated(context, StringKeys.category),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(color: hintTextColor),
+                adminRepository.categoryList.isEmpty
+                    ? const SizedBox()
+                    : Column(
+                        children: [
+                          const SizedBox(height: 10),
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.all(Radius.circular(10)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 1,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 1),
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: DropdownButton<int>(
+                                value: selectedCategoryId,
+                                onChanged: (int? newValue) {
+                                  setState(() {
+                                    selectedCategoryId = newValue;
+                                  });
+                                },
+                                autofocus: true,
+                                items: adminRepository.categoryList.map((category) {
+                                  return getDropdownItem(category.name, category.id);
+                                }).toList(),
+                                selectedItemBuilder: (context) {
+                                  return adminRepository.categoryList.map((category) {
+                                    return getDropdownSelectedItem(category.name);
+                                  }).toList();
+                                },
+                                underline: Container(),
+                                iconEnabledColor: hintTextColor,
+                                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                isExpanded: true,
+                                icon: const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  child: Icon(
+                                    Icons.arrow_drop_down_circle_outlined,
+                                    color: primaryColor,
+                                  ),
+                                ),
+                                hint: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      getTranslated(context, StringKeys.category),
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(color: hintTextColor),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextFormFieldComponent(
-                  hintText: getTranslated(context, StringKeys.price),
-                  context: context,
-                  textEditingController: priceTextEditingController,
-                  keyboardType: TextInputType.number,
-                  numbersOnly: true,
-                  maxCharacter: 10,
-                  suffixIcon: Tooltip(
-                    message: adminRepository.currencyList[selectedCurrencyIndex].name,
-                    child: TextButton(
-                      onPressed: () {
-                        setState(() {
-                          if (selectedCurrencyIndex < adminRepository.currencyList.length - 1) {
-                            selectedCurrencyIndex++;
-                          } else {
-                            selectedCurrencyIndex = 0;
-                          }
-                        });
-                      },
-                      child: Text(
-                        adminRepository.currencyList[selectedCurrencyIndex].symbol,
-                        style: const TextStyle(fontSize: 20),
+                adminRepository.currencyList.isEmpty
+                    ? const SizedBox()
+                    : Column(
+                        children: [
+                          const SizedBox(height: 10),
+                          TextFormFieldComponent(
+                            hintText: getTranslated(context, StringKeys.price),
+                            context: context,
+                            textEditingController: priceTextEditingController,
+                            keyboardType: TextInputType.number,
+                            numbersOnly: true,
+                            maxCharacter: 10,
+                            suffixIcon: Tooltip(
+                              message: adminRepository.currencyList[selectedCurrencyIndex].name,
+                              child: TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    if (selectedCurrencyIndex < adminRepository.currencyList.length - 1) {
+                                      selectedCurrencyIndex++;
+                                    } else {
+                                      selectedCurrencyIndex = 0;
+                                    }
+                                  });
+                                },
+                                child: Text(
+                                  adminRepository.currencyList[selectedCurrencyIndex].symbol,
+                                  style: const TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ),
-                ),
                 const SizedBox(height: 10),
                 TextFormFieldComponent(
                   hintText: getTranslated(context, StringKeys.videoUrl),
@@ -306,6 +324,16 @@ class _UpdateProductPageState extends ConsumerState<UpdateProductPage> {
                                     child: Dismissible(
                                       key: const Key("productImage"),
                                       direction: DismissDirection.horizontal,
+                                      background: Container(
+                                        decoration: const BoxDecoration(color: danger),
+                                        child: const Center(
+                                          child: Icon(
+                                            Icons.image_not_supported_outlined,
+                                            size: 50,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
                                       onDismissed: (direction) {
                                         setState(() {
                                           _selectedImage = null;
@@ -393,7 +421,9 @@ class _UpdateProductPageState extends ConsumerState<UpdateProductPage> {
   }
 
   bool _checkInformations() {
-    if (nameTextEditingController.text.trim().isEmpty ||
+    if (ref.read(adminProvider).currencyList.isEmpty ||
+        ref.read(adminProvider).categoryList.isEmpty ||
+        nameTextEditingController.text.trim().isEmpty ||
         descriptionTextEditingController.text.trim().isEmpty ||
         priceTextEditingController.text.trim().isEmpty ||
         videoUrlTextEditingController.text.trim().isEmpty ||

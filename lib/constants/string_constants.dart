@@ -29,4 +29,10 @@ class StringKeys {
   static String product = 'product';
   static String image = 'image';
   static String videoUrl = 'video_url';
+  static String noProduct = 'no_product';
+  static String noCategory = 'no_category';
+  static String noCurrency = 'no_currency';
+  static String errorFetchingCategories = 'error_fetching_categories';
+  static String errorFetchingProducts = 'error_fetching_products';
+  static String errorFetchingCurrencies = 'error_fetching_currencies';
 }

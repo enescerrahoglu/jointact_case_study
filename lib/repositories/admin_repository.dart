@@ -204,7 +204,8 @@ class AdminRepository extends ChangeNotifier {
         final Map<String, dynamic> responseData = json.decode(response.body);
         final responseModel = ResponseModel.fromJson(responseData);
         if (responseModel.isSuccessful) {
-          productList.where((element) => element.id == productModel.id).first.name = productModel.name;
+          productList[productList.indexOf(productList.where((element) => element.id == productModel.id).first)] =
+              productModel;
           notifyListeners();
         }
         return responseModel;
