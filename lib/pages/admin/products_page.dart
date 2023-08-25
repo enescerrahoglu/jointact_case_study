@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/constants/string_constants.dart';
@@ -11,6 +10,7 @@ import 'package:jointact_case_study/pages/admin/create_product_page.dart';
 import 'package:jointact_case_study/pages/admin/update_product_page.dart';
 import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/admin_repository.dart';
+import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 import 'package:jointact_case_study/widgets/loading_widget.dart';
 
 class ProductsPage extends ConsumerStatefulWidget {
@@ -40,24 +40,9 @@ class _ProductsPageState extends ConsumerState<ProductsPage> {
     AdminRepository adminRepository = ref.watch(adminProvider);
     return Stack(children: [
       Scaffold(
-        appBar: AppBar(
-          surfaceTintColor: Colors.transparent,
-          systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: Colors.transparent,
-            statusBarIconBrightness: Brightness.dark,
-            statusBarBrightness: Brightness.light,
-          ),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.deepPurple,
-          title: Text(
-            getTranslated(context, StringKeys.products),
-            style: const TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white),
-            onPressed: () => Navigator.pop(context),
-          ),
+        appBar: AppBarWidget(
+          title: getTranslated(context, StringKeys.products),
+          leadingIcon: Icons.arrow_back_ios_rounded,
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -71,7 +56,7 @@ class _ProductsPageState extends ConsumerState<ProductsPage> {
           backgroundColor: primaryColor,
           child: const Icon(
             CupertinoIcons.add,
-            color: Colors.white,
+            color: buttonForegroundColor,
           ),
         ),
         body: RefreshIndicator(

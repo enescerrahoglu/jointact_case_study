@@ -12,4 +12,13 @@ class UIHelper {
   static isDevicePortrait(BuildContext context) {
     return MediaQuery.of(context).orientation == Orientation.portrait ? true : false;
   }
+
+  static List<BoxShadow>? boxShadow = [
+    BoxShadow(
+      color: Colors.grey.withOpacity(0.5),
+      spreadRadius: 1,
+      blurRadius: 5,
+      offset: const Offset(0, 1),
+    ),
+  ];
 }

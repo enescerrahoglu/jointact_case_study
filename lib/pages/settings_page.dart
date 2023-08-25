@@ -5,6 +5,7 @@ import 'package:jointact_case_study/localization/app_localization.dart';
 import 'package:jointact_case_study/localization/language.dart';
 import 'package:jointact_case_study/localization/language_localization.dart';
 import 'package:jointact_case_study/main.dart';
+import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -44,14 +45,12 @@ class _SettingsPageState extends State<SettingsPage> {
       if (locale == null) {
         setState(() {
           _locale = View.of(context).platformDispatcher.locale;
-          selectedLanguage = languages!.firstWhere(
-              (element) => element.languageCode == _locale!.languageCode);
+          selectedLanguage = languages!.firstWhere((element) => element.languageCode == _locale!.languageCode);
         });
       } else {
         setState(() {
           _locale = locale;
-          selectedLanguage = languages!.firstWhere(
-              (element) => element.languageCode == _locale!.languageCode);
+          selectedLanguage = languages!.firstWhere((element) => element.languageCode == _locale!.languageCode);
         });
       }
     });
@@ -61,32 +60,16 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        surfaceTintColor: Colors.transparent,
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.dark,
-          statusBarBrightness: Brightness.light,
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.deepPurple,
-        title: Text(
-          getTranslated(context, StringKeys.settings),
-          style: const TextStyle(color: Colors.white, fontSize: 18),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
+      appBar: AppBarWidget(
+        title: getTranslated(context, StringKeys.settings),
+        leadingIcon: Icons.arrow_back_ios_rounded,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             ListTile(
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
               title: Text(
                 getTranslated(context, StringKeys.appLanguage),
                 style: const TextStyle(fontSize: 18),
@@ -115,7 +98,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             backgroundColor: Colors.transparent,
                             title: Text(
                               getTranslated(context, StringKeys.appLanguage),
-                              style: const TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 18),
                             ),
                             leading: IconButton(
                               icon: const Icon(Icons.arrow_back_ios_rounded),
@@ -125,40 +108,31 @@ class _SettingsPageState extends State<SettingsPage> {
                           ...languages!.map((language) {
                             return Padding(
                               padding: languages!.indexOf(language) == 0
-                                  ? const EdgeInsets.only(
-                                      top: 10, left: 10, right: 10)
-                                  : languages!.indexOf(language) ==
-                                          (languages!.length - 1)
-                                      ? const EdgeInsets.only(
-                                          bottom: 10, left: 10, right: 10)
-                                      : const EdgeInsets.only(
-                                          left: 10, right: 10),
+                                  ? const EdgeInsets.only(top: 10, left: 10, right: 10)
+                                  : languages!.indexOf(language) == (languages!.length - 1)
+                                      ? const EdgeInsets.only(bottom: 10, left: 10, right: 10)
+                                      : const EdgeInsets.only(left: 10, right: 10),
                               child: ListTile(
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
+                                shape:
+                                    const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
                                 title: Text(
                                   language.name,
                                   style: const TextStyle(fontSize: 18),
                                 ),
                                 leading: Radio(
                                   visualDensity: const VisualDensity(
-                                      horizontal: VisualDensity.minimumDensity,
-                                      vertical: VisualDensity.minimumDensity),
-                                  // activeColor: primaryColor,
+                                      horizontal: VisualDensity.minimumDensity, vertical: VisualDensity.minimumDensity),
                                   value: language,
                                   groupValue: selectedLanguage,
                                   onChanged: (selectedLanguage) async {
-                                    _setSelectedLang(
-                                        selectedLanguage as Language);
+                                    _setSelectedLang(selectedLanguage as Language);
                                     _changeLanguage(selectedLanguage);
                                     selectedLanguage = language;
                                     Navigator.pop(context);
                                   },
                                 ),
                                 onTap: () async {
-                                  _setSelectedLang(
-                                      selectedLanguage as Language);
+                                  _setSelectedLang(selectedLanguage as Language);
                                   _changeLanguage(language);
                                   selectedLanguage = language;
                                   Navigator.pop(context);

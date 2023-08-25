@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
 import 'package:jointact_case_study/localization/language_localization.dart';
 import 'package:jointact_case_study/pages/redirect_page.dart';
@@ -61,7 +62,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'JointAct',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
         useMaterial3: true,
       ),
       home: const RedirectPage(),

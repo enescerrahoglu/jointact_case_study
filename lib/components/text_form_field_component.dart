@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jointact_case_study/constants/color_constants.dart';
+import 'package:jointact_case_study/helpers/ui_helper.dart';
 
 class TextFormFieldComponent extends StatefulWidget {
   final BuildContext context;
@@ -79,14 +81,7 @@ class _TextFormFieldComponentState extends State<TextFormFieldComponent> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 1,
-              blurRadius: 5,
-              offset: const Offset(0, 1),
-            ),
-          ],
+          boxShadow: UIHelper.boxShadow,
         ),
         child: TextFormField(
           textAlignVertical: TextAlignVertical.top,
@@ -121,12 +116,12 @@ class _TextFormFieldComponentState extends State<TextFormFieldComponent> {
                 : LengthLimitingTextInputFormatter(widget.maxCharacter)),
           ],
           decoration: InputDecoration(
-            hintStyle: TextStyle(color: Colors.deepPurple.shade300),
+            hintStyle: const TextStyle(color: hintTextColor),
             errorStyle: const TextStyle(height: 0),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
-                color: Colors.red,
+                color: dangerDark,
                 width: 1,
               ),
             ),
@@ -146,12 +141,12 @@ class _TextFormFieldComponentState extends State<TextFormFieldComponent> {
                         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                         child: Text(
                           widget.prefixText!,
-                          style: const TextStyle(color: Colors.deepPurple, fontSize: 12),
+                          style: const TextStyle(color: primaryColor, fontSize: 12),
                         ),
                       )
                     : null,
             hintText: widget.hintText,
-            fillColor: widget.itemBackgroundColor ?? Colors.white,
+            fillColor: widget.itemBackgroundColor ?? itemBackgroundColor,
             filled: true,
             suffixIcon: widget.suffixIcon ??
                 (widget.isPassword == true
@@ -167,13 +162,13 @@ class _TextFormFieldComponentState extends State<TextFormFieldComponent> {
                           margin: const EdgeInsets.only(right: 10, top: 15, bottom: 15),
                           child: Icon(
                             isObscured ? Icons.visibility : Icons.visibility_off,
-                            color: Colors.deepPurple,
+                            color: primaryColor,
                           ),
                         ),
                       )
                     : null),
           ),
-          cursorColor: Colors.deepPurple,
+          cursorColor: primaryColor,
           scrollPadding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),

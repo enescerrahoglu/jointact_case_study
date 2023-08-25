@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jointact_case_study/constants/color_constants.dart';
 
 class LoadingWidget extends StatefulWidget {
   final bool isLoading;
@@ -17,10 +18,10 @@ class _LoadingWidgetState extends State<LoadingWidget> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         color: Colors.black54,
-        child: Center(
+        child: const Center(
             child: CircularProgressIndicator(
-          color: Colors.deepPurple.shade300,
-          backgroundColor: Colors.deepPurple,
+          color: secondaryColor,
+          backgroundColor: primaryColor,
         )),
       ),
     );

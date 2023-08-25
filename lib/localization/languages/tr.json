@@ -34,5 +34,6 @@
     "no_currency": "Para birimi yok!",
     "error_fetching_categories": "Kategoriler getirilirken bir hata oluştu!",
     "error_fetching_products": "Ürünler getirilirken bir hata oluştu!",
-    "error_fetching_currencies": "Para birimleri getirilirken bir hata oluştu!"
+    "error_fetching_currencies": "Para birimleri getirilirken bir hata oluştu!",
+    "log_out": "Çıkış yap"
 }

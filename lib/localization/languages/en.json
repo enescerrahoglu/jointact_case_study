@@ -34,5 +34,6 @@
     "no_currency": "No currency!",
     "error_fetching_categories": "An error occurred while fetching categories!",
     "error_fetching_products": "An error occurred while fetching products!",
-    "error_fetching_currencies": "An error occurred while fetching currencies!"
+    "error_fetching_currencies": "An error occurred while fetching currencies!",
+    "log_out": "Log out"
 }

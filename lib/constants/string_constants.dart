@@ -35,4 +35,5 @@ class StringKeys {
   static String errorFetchingCategories = 'error_fetching_categories';
   static String errorFetchingProducts = 'error_fetching_products';
   static String errorFetchingCurrencies = 'error_fetching_currencies';
+  static String logOut = 'log_out';
 }
