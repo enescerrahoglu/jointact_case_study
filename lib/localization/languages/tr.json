@@ -28,5 +28,11 @@
     "category": "Kategori",
     "product": "Ürün",
     "image": "Görsel",
-    "video_url": "Video URL"
+    "video_url": "Video URL",
+    "no_product": "Ürün yok!",
+    "no_category": "Kategori yok!",
+    "no_currency": "Para birimi yok!",
+    "error_fetching_categories": "Kategoriler getirilirken bir hata oluştu!",
+    "error_fetching_products": "Ürünler getirilirken bir hata oluştu!",
+    "error_fetching_currencies": "Para birimleri getirilirken bir hata oluştu!"
 }

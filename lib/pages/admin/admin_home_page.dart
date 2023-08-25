@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +12,7 @@ import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
 import 'package:jointact_case_study/pages/admin/categories_page.dart';
 import 'package:jointact_case_study/pages/admin/products_page.dart';
+import 'package:jointact_case_study/pages/admin/update_product_page.dart';
 import 'package:jointact_case_study/pages/settings_page.dart';
 import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/admin_repository.dart';
@@ -31,15 +34,7 @@ class _AdminHomePageState extends ConsumerState<AdminHomePage> {
     super.initState();
 
     Future.delayed(Duration.zero, () async {
-      setState(() {
-        isLoading = true;
-      });
-      await ref.read(adminProvider).getCategories();
-      await ref.read(adminProvider).getCurrencies();
-      await ref.read(adminProvider).getProducts();
-      setState(() {
-        isLoading = false;
-      });
+      await getData();
     });
   }
 
@@ -87,33 +82,7 @@ class _AdminHomePageState extends ConsumerState<AdminHomePage> {
           drawer: const NavigationDrawer(),
           body: RefreshIndicator(
             onRefresh: () async {
-              setState(() {
-                isLoading = true;
-              });
-              selectedCategoryId = null;
-              await ref.read(adminProvider).getCategories().then((response) {
-                if (response.isSuccessful == false) {
-                  AppFunctions.showSnackbar(context, getTranslated(context, StringKeys.somethingWentWrong),
-                      backgroundColor: dangerDark, icon: Icons.cancel);
-                }
-              });
-
-              await ref.read(adminProvider).getCurrencies().then((response) {
-                if (response.isSuccessful == false) {
-                  AppFunctions.showSnackbar(context, getTranslated(context, StringKeys.somethingWentWrong),
-                      backgroundColor: dangerDark, icon: Icons.cancel);
-                }
-              });
-
-              await ref.read(adminProvider).getProducts().then((response) {
-                if (response.isSuccessful == false) {
-                  AppFunctions.showSnackbar(context, getTranslated(context, StringKeys.somethingWentWrong),
-                      backgroundColor: dangerDark, icon: Icons.cancel);
-                }
-              });
-              setState(() {
-                isLoading = false;
-              });
+              await getData();
             },
             child: ListView(
               padding: const EdgeInsets.all(10),
@@ -121,64 +90,266 @@ class _AdminHomePageState extends ConsumerState<AdminHomePage> {
                 Column(
                   children: [
                     Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 5,
-                            offset: const Offset(0, 1),
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: DropdownButton<int>(
-                          value: selectedCategoryId,
-                          onChanged: (int? newValue) {
-                            setState(() {
-                              selectedCategoryId = newValue;
-                            });
-                          },
-                          autofocus: true,
-                          items: adminRepository.categoryList.map((category) {
-                            return getDropdownItem(category.name, category.id);
-                          }).toList(),
-                          selectedItemBuilder: (context) {
-                            return adminRepository.categoryList.map((category) {
-                              return getDropdownSelectedItem(category.name);
-                            }).toList();
-                          },
-                          underline: Container(),
-                          iconEnabledColor: hintTextColor,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
                           borderRadius: const BorderRadius.all(Radius.circular(10)),
-                          isExpanded: true,
-                          icon: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            child: Icon(
-                              Icons.arrow_drop_down_circle_outlined,
-                              color: primaryColor,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 1,
+                              blurRadius: 5,
+                              offset: const Offset(0, 1),
                             ),
-                          ),
-                          hint: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                getTranslated(context, StringKeys.categories),
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(color: hintTextColor),
-                              ),
-                            ),
+                          ],
+                        ),
+                        child: adminRepository.currencyList.isEmpty
+                            ? Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                margin: const EdgeInsets.all(10),
+                                child: Center(
+                                  child: Text(getTranslated(context, StringKeys.noCurrency),
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: primaryColor,
+                                      )),
+                                ),
+                              )
+                            : SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: adminRepository.currencyList.map((currency) {
+                                    return Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                      margin: adminRepository.currencyList.indexOf(currency) ==
+                                              (adminRepository.currencyList.length - 1)
+                                          ? const EdgeInsets.all(10)
+                                          : const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 1,
+                                            blurRadius: 5,
+                                            offset: const Offset(0, 1),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            currency.symbol,
+                                            style: const TextStyle(fontWeight: FontWeight.bold),
+                                          ),
+                                          const VerticalDivider(
+                                            color: Colors.black45,
+                                            thickness: 2,
+                                          ),
+                                          Text(currency.name),
+                                        ],
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              )),
+                    const SizedBox(height: 10),
+                  ],
+                ),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: const Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: DropdownButton<int>(
+                      value: selectedCategoryId,
+                      onChanged: (int? newValue) {
+                        setState(() {
+                          selectedCategoryId = newValue;
+                        });
+                      },
+                      autofocus: true,
+                      items: adminRepository.categoryList.map((category) {
+                        return getDropdownItem(category.name, category.id);
+                      }).toList(),
+                      selectedItemBuilder: (context) {
+                        return adminRepository.categoryList.map((category) {
+                          return getDropdownSelectedItem(category.name);
+                        }).toList();
+                      },
+                      underline: Container(),
+                      iconEnabledColor: hintTextColor,
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      isExpanded: true,
+                      icon: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0),
+                        child: selectedCategoryId == null
+                            ? const IconButton(
+                                padding: EdgeInsets.zero,
+                                onPressed: null,
+                                icon: Icon(
+                                  Icons.arrow_drop_down_circle_outlined,
+                                  color: primaryColor,
+                                ))
+                            : IconButton(
+                                padding: EdgeInsets.zero,
+                                onPressed: () {
+                                  setState(() {
+                                    selectedCategoryId = null;
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.cancel_outlined,
+                                  color: Colors.red,
+                                )),
+                      ),
+                      hint: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            getTranslated(context, StringKeys.categories),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: hintTextColor),
                           ),
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
+                const SizedBox(height: 10),
+                ((adminRepository.productList
+                                .where((element) => element.categoryId == selectedCategoryId)
+                                .toList()
+                                .isEmpty &&
+                            selectedCategoryId != null) ||
+                        adminRepository.productList.isEmpty)
+                    ? isLoading
+                        ? const SizedBox()
+                        : Center(
+                            child: Text(
+                              getTranslated(context, StringKeys.noProduct),
+                              style: const TextStyle(fontWeight: FontWeight.bold, color: primaryColor),
+                            ),
+                          )
+                    : Visibility(
+                        visible: !isLoading,
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: UIHelper.getDeviceWidth(context) > 450 ? 3 : 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 16 / 24,
+                          ),
+                          itemBuilder: (context, index) {
+                            final product = selectedCategoryId != null
+                                ? adminRepository.productList
+                                    .where((element) => element.categoryId == selectedCategoryId)
+                                    .toList()[index]
+                                : adminRepository.productList[index];
+                            return GestureDetector(
+                              onTap: () {
+                                adminRepository.selectedProduct = product;
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const UpdateProductPage(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 1,
+                                      blurRadius: 5,
+                                      offset: const Offset(0, 1),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                                      child: AspectRatio(
+                                        aspectRatio: 1,
+                                        child: Image.memory(
+                                          base64Decode(product.imageBase64),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Center(
+                                        child: SingleChildScrollView(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Center(
+                                                child: Text(
+                                                  product.name,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  softWrap: true,
+                                                  maxLines: 2,
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              const Divider(color: Colors.grey),
+                                              Center(
+                                                child: Text(
+                                                  "${adminRepository.currencyList.isEmpty ? "" : adminRepository.currencyList.where((element) => element.id == product.currencyId).first.symbol} ${product.price}",
+                                                  overflow: TextOverflow.ellipsis,
+                                                  softWrap: true,
+                                                  maxLines: 1,
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: secondaryColor,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          itemCount: selectedCategoryId != null
+                              ? adminRepository.productList
+                                  .where((element) => element.categoryId == selectedCategoryId)
+                                  .toList()
+                                  .length
+                              : adminRepository.productList.length,
+                        ),
+                      )
               ],
             ),
           ),
@@ -186,6 +357,36 @@ class _AdminHomePageState extends ConsumerState<AdminHomePage> {
         LoadingWidget(isLoading: isLoading),
       ],
     );
+  }
+
+  Future<void> getData() async {
+    setState(() {
+      isLoading = true;
+    });
+    selectedCategoryId = null;
+    await ref.read(adminProvider).getCategories().then((response) {
+      if (response.isSuccessful == false) {
+        AppFunctions.showSnackbar(context, getTranslated(context, StringKeys.errorFetchingCategories),
+            backgroundColor: dangerDark, icon: Icons.cancel);
+      }
+    });
+
+    await ref.read(adminProvider).getCurrencies().then((response) {
+      if (response.isSuccessful == false) {
+        AppFunctions.showSnackbar(context, getTranslated(context, StringKeys.errorFetchingCurrencies),
+            backgroundColor: dangerDark, icon: Icons.cancel);
+      }
+    });
+
+    await ref.read(adminProvider).getProducts().then((response) {
+      if (response.isSuccessful == false) {
+        AppFunctions.showSnackbar(context, getTranslated(context, StringKeys.errorFetchingProducts),
+            backgroundColor: dangerDark, icon: Icons.cancel);
+      }
+    });
+    setState(() {
+      isLoading = false;
+    });
   }
 }
 

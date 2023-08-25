@@ -61,6 +61,7 @@ class _CreateCategoryPageState extends ConsumerState<CreateCategoryPage> {
                   hintText: getTranslated(context, StringKeys.categoryName),
                   context: context,
                   textEditingController: textEditingController,
+                  textCapitalization: TextCapitalization.words,
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(

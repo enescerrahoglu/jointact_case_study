@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -92,10 +93,18 @@ class AppFunctions {
   }
 
   Future<File?> pickImageFromGallery() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+
     try {
       PermissionStatus permissionStatus = PermissionStatus.denied;
-      await Permission.storage.request();
-      permissionStatus = await Permission.storage.status;
+      if (int.parse(androidInfo.version.release) >= 12) {
+        await Permission.photos.request();
+        permissionStatus = await Permission.photos.status;
+      } else {
+        await Permission.storage.request();
+        permissionStatus = await Permission.storage.status;
+      }
       if (permissionStatus.isGranted) {
         try {
           final image = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 100, maxWidth: 1920);
