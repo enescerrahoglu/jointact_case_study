@@ -1,16 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jointact_case_study/components/button_component.dart';
 import 'package:jointact_case_study/components/text_form_field_component.dart';
 import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/constants/string_constants.dart';
 import 'package:jointact_case_study/helpers/app_functions.dart';
+import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
 import 'package:jointact_case_study/models/product_model.dart';
 import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/admin_repository.dart';
+import 'package:jointact_case_study/widgets/app_bar_widget.dart';
+import 'package:jointact_case_study/widgets/dropdown_item_widget.dart';
 import 'package:jointact_case_study/widgets/loading_widget.dart';
 
 class CreateProductPage extends ConsumerStatefulWidget {
@@ -67,24 +70,9 @@ class _CreateProductPageState extends ConsumerState<CreateProductPage> {
     return Stack(
       children: [
         Scaffold(
-          appBar: AppBar(
-            surfaceTintColor: Colors.transparent,
-            systemOverlayStyle: const SystemUiOverlayStyle(
-              statusBarColor: Colors.transparent,
-              statusBarIconBrightness: Brightness.dark,
-              statusBarBrightness: Brightness.light,
-            ),
-            centerTitle: true,
-            elevation: 0,
-            backgroundColor: Colors.deepPurple,
-            title: Text(
-              getTranslated(context, StringKeys.createProduct),
-              style: const TextStyle(color: Colors.white, fontSize: 18),
-            ),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white),
-              onPressed: () => Navigator.pop(context),
-            ),
+          appBar: AppBarWidget(
+            title: getTranslated(context, StringKeys.createProduct),
+            leadingIcon: Icons.arrow_back_ios_rounded,
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(10),
@@ -111,16 +99,9 @@ class _CreateProductPageState extends ConsumerState<CreateProductPage> {
                           Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: itemBackgroundColor,
                               borderRadius: const BorderRadius.all(Radius.circular(10)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 1,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 1),
-                                ),
-                              ],
+                              boxShadow: UIHelper.boxShadow,
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
@@ -133,11 +114,11 @@ class _CreateProductPageState extends ConsumerState<CreateProductPage> {
                                 },
                                 autofocus: true,
                                 items: adminRepository.categoryList.map((category) {
-                                  return getDropdownItem(category.name, category.id);
+                                  return DropdownItemWidget.getDropdownItem(category.name, category.id);
                                 }).toList(),
                                 selectedItemBuilder: (context) {
                                   return adminRepository.categoryList.map((category) {
-                                    return getDropdownSelectedItem(category.name);
+                                    return DropdownItemWidget.getSelectedDropdownItem(category.name);
                                   }).toList();
                                 },
                                 underline: Container(),
@@ -212,15 +193,8 @@ class _CreateProductPageState extends ConsumerState<CreateProductPage> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                          offset: const Offset(0, 1),
-                        ),
-                      ],
+                      color: itemBackgroundColor,
+                      boxShadow: UIHelper.boxShadow,
                     ),
                     child: Material(
                       borderRadius: BorderRadius.circular(10),
@@ -264,7 +238,7 @@ class _CreateProductPageState extends ConsumerState<CreateProductPage> {
                                           child: Icon(
                                             Icons.image_not_supported_outlined,
                                             size: 50,
-                                            color: Colors.white,
+                                            color: buttonForegroundColor,
                                           ),
                                         ),
                                       ),
@@ -289,7 +263,8 @@ class _CreateProductPageState extends ConsumerState<CreateProductPage> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                ElevatedButton(
+                ButtonComponent(
+                  text: getTranslated(context, StringKeys.add),
                   onPressed: () async {
                     if (_checkInformations()) {
                       setState(() {
@@ -325,20 +300,7 @@ class _CreateProductPageState extends ConsumerState<CreateProductPage> {
                       });
                     }
                   },
-                  style: ElevatedButton.styleFrom(
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    minimumSize: const Size.fromHeight(50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: Text(
-                    getTranslated(context, StringKeys.add),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
+                  isWide: true,
                 ),
               ],
             ),
@@ -375,30 +337,4 @@ class _CreateProductPageState extends ConsumerState<CreateProductPage> {
       });
     }
   }
-}
-
-DropdownMenuItem<int> getDropdownItem(String label, int value) {
-  return DropdownMenuItem<int>(
-    value: value,
-    child: Text(
-      label,
-      softWrap: true,
-      overflow: TextOverflow.ellipsis,
-      textAlign: TextAlign.start,
-    ),
-  );
-}
-
-Widget getDropdownSelectedItem(String label) {
-  return Container(
-    padding: const EdgeInsets.only(left: 15),
-    alignment: Alignment.centerLeft,
-    child: Text(
-      label,
-      maxLines: 1,
-      softWrap: true,
-      overflow: TextOverflow.ellipsis,
-      textAlign: TextAlign.start,
-    ),
-  );
 }

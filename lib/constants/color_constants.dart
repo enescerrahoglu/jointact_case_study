@@ -19,7 +19,10 @@ MaterialColor primaryMaterialColor = const MaterialColor(
 const Color appBackgroundLightColor = Color(0xFFFFFFFF);
 const Color appBackgroundDarkColor = Color(0xFF000000);
 
-const Color itemBackgroundColor = Color(0xFFebf6f5);
+const Color appBarForegroundColor = Color(0xFFFFFFFF);
+const Color itemBackgroundColor = Color(0xFFFFFFFF);
+const Color buttonForegroundColor = Color(0xFFFFFFFF);
+const Color buttonBackgroundColor = Color(0xFFE8D9FF);
 
 const Color listViewItemBackgroundLightColor = Color.fromARGB(255, 240, 240, 240);
 const Color listViewItemBackgroundDarkColor = Color.fromARGB(255, 77, 77, 77);
@@ -30,11 +33,12 @@ const Color indicatorColor = Color(0xFF20615f);
 const Color indicatorBackgroundColor = Color(0xFF86c7c5);
 
 const Color primaryColor = Color(0xFF673AB7);
-const Color secondaryColor = Color(0xFF7C4DFF);
+const Color secondaryColor = Color(0xFF9575CD);
 
 const Color textPrimaryColor = Color(0xFF000000);
 
 const Color hintTextColor = Color(0xFF9575CD);
+const Color splashColor = Color(0xFF9575CD);
 
 const Color itemDividerColor = Color(0xFFaedad9);
 const Color iconColor = Color(0xFF000000);

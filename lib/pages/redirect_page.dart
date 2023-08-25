@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jointact_case_study/components/button_component.dart';
+import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/constants/image_constants.dart';
 import 'package:jointact_case_study/constants/string_constants.dart';
 import 'package:jointact_case_study/helpers/ui_helper.dart';
@@ -29,64 +29,111 @@ class _RedirectPageState extends State<RedirectPage> {
         ),
         toolbarHeight: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Column(
-                children: [
-                  SvgPicture.asset(
-                    IconAssetKeys.user,
-                    width: UIHelper.getDeviceWidth(context) / 4,
-                    color: Colors.deepPurple,
-                  ),
-                  ButtonComponent(
-                    text: getTranslated(context, StringKeys.customer),
-                    onPressed: () {
-                      Navigator.push(
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: itemBackgroundColor,
+                  boxShadow: UIHelper.boxShadow,
+                ),
+                child: Material(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(10),
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const CustomerHomePage(),
                         ),
+                        (route) => false,
                       );
                     },
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.transparent,
+                      ),
+                      child: Column(
+                        children: [
+                          SvgPicture.asset(
+                            IconAssetKeys.user,
+                            width: UIHelper.getDeviceWidth(context) / 4,
+                            color: primaryColor,
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            getTranslated(context, StringKeys.customer),
+                            style: const TextStyle(
+                              color: primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ],
+                ),
               ),
-            ),
-            const Divider(color: Colors.deepPurple, height: 50),
-            Center(
-              child: Column(
-                children: [
-                  SvgPicture.asset(
-                    IconAssetKeys.userTie,
-                    width: UIHelper.getDeviceWidth(context) / 4,
-                    color: Colors.deepPurple,
-                  ),
-                  ButtonComponent(
-                    text: getTranslated(context, StringKeys.admin),
-                    onPressed: () {
-                      // Navigator.pushAndRemoveUntil(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const AdminHomePage(),
-                      //   ),
-                      //   (route) => false,
-                      // );
-                      Navigator.push(
+              const Divider(color: primaryColor, height: 50),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: itemBackgroundColor,
+                  boxShadow: UIHelper.boxShadow,
+                ),
+                child: Material(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(10),
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const AdminHomePage(),
                         ),
+                        (route) => false,
                       );
                     },
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.transparent,
+                      ),
+                      child: Column(
+                        children: [
+                          SvgPicture.asset(
+                            IconAssetKeys.userTie,
+                            width: UIHelper.getDeviceWidth(context) / 4,
+                            color: primaryColor,
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            getTranslated(context, StringKeys.admin),
+                            style: const TextStyle(
+                              color: primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

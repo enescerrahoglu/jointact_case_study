@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class AppFunctions {
             width: UIHelper.getDeviceWidth(context) / 4,
             height: UIHelper.getDeviceWidth(context) / 4,
             child: IconButton(
-              splashColor: Colors.deepPurple.shade300,
+              splashColor: splashColor,
               iconSize: UIHelper.getDeviceWidth(context) / 8,
               onPressed: () {
                 cameraFunction();
@@ -68,7 +69,7 @@ class AppFunctions {
             width: UIHelper.getDeviceWidth(context) / 4,
             height: UIHelper.getDeviceWidth(context) / 4,
             child: IconButton(
-              splashColor: Colors.deepPurple.shade300,
+              splashColor: splashColor,
               iconSize: UIHelper.getDeviceWidth(context) / 8,
               onPressed: () {
                 galleryFunction();
@@ -83,7 +84,7 @@ class AppFunctions {
         ],
       ),
       behavior: SnackBarBehavior.fixed,
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: primaryColor,
       duration: const Duration(seconds: 3),
     );
 
