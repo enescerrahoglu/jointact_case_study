@@ -5,7 +5,7 @@ import 'package:jointact_case_study/constants/string_constants.dart';
 import 'package:jointact_case_study/helpers/app_functions.dart';
 import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
-import 'package:jointact_case_study/pages/redirect_page.dart';
+import 'package:jointact_case_study/pages/user/product_detail_page.dart';
 import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/user_repository.dart';
 import 'package:jointact_case_study/widgets/app_bar_widget.dart';
@@ -149,13 +149,12 @@ class _UserHomePageState extends ConsumerState<UserHomePage> {
                             : userRepository.productList[index];
                         return UserProductGridItem(
                           product: product,
-                          currencyList: userRepository.currencyList,
                           onTap: () {
                             userRepository.selectedProduct = product;
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const RedirectPage(),
+                                builder: (context) => const ProductDetailPage(),
                               ),
                             );
                           },

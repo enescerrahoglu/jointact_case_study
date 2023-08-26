@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jointact_case_study/constants/color_constants.dart';
@@ -43,12 +44,12 @@ class _NavigationPageState extends ConsumerState<NavigationPage> {
             destinations: <NavigationDestination>[
               NavigationDestination(
                 icon: const Icon(
-                  Icons.home_outlined,
+                  CupertinoIcons.house_alt,
                   size: 26,
                   color: primaryColor,
                 ),
                 selectedIcon: const Icon(
-                  Icons.home,
+                  CupertinoIcons.house_alt_fill,
                   size: 26,
                   color: primaryColor,
                 ),
@@ -57,12 +58,12 @@ class _NavigationPageState extends ConsumerState<NavigationPage> {
               ),
               NavigationDestination(
                 icon: const Icon(
-                  Icons.shopping_basket_outlined,
+                  CupertinoIcons.cart,
                   size: 26,
                   color: primaryColor,
                 ),
                 selectedIcon: const Icon(
-                  Icons.shopping_basket,
+                  CupertinoIcons.cart_fill,
                   size: 26,
                   color: primaryColor,
                 ),
@@ -71,12 +72,12 @@ class _NavigationPageState extends ConsumerState<NavigationPage> {
               ),
               NavigationDestination(
                 icon: const Icon(
-                  Icons.person_outline_outlined,
+                  CupertinoIcons.person,
                   size: 26,
                   color: primaryColor,
                 ),
                 selectedIcon: const Icon(
-                  Icons.person,
+                  CupertinoIcons.person_solid,
                   size: 26,
                   color: primaryColor,
                 ),

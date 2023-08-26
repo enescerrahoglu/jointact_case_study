@@ -4,9 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/constants/image_constants.dart';
 import 'package:jointact_case_study/constants/string_constants.dart';
+import 'package:jointact_case_study/helpers/shared_preferences_helper.dart';
 import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
 import 'package:jointact_case_study/pages/redirect_page.dart';
+import 'package:jointact_case_study/pages/settings_page.dart';
 import 'package:jointact_case_study/pages/user/orders_page.dart';
 import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/user_repository.dart';
@@ -41,8 +43,8 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
               child: Column(
                 children: [
                   SizedBox(
-                    width: UIHelper.getDeviceWidth(context) / 6,
-                    height: UIHelper.getDeviceWidth(context) / 6,
+                    width: UIHelper.getDeviceWidth(context) / 4,
+                    height: UIHelper.getDeviceWidth(context) / 4,
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(Radius.circular(500)),
@@ -100,16 +102,31 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
             ),
             const SizedBox(height: 10),
             ListTileWidget(
-              content: getTranslated(context, StringKeys.logOut),
-              iconData: CupertinoIcons.square_arrow_left_fill,
+              content: getTranslated(context, StringKeys.settings),
+              iconData: Icons.settings,
               onTap: () {
-                Navigator.pushAndRemoveUntil(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RedirectPage(),
+                    builder: (context) => const SettingsPage(),
                   ),
-                  (route) => false,
                 );
+              },
+            ),
+            const SizedBox(height: 10),
+            ListTileWidget(
+              content: getTranslated(context, StringKeys.logOut),
+              iconData: CupertinoIcons.square_arrow_left_fill,
+              onTap: () async {
+                await SharedPreferencesHelper.remove("createdUserModel").then((value) {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RedirectPage(),
+                    ),
+                    (route) => false,
+                  );
+                });
               },
             ),
           ],

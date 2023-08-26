@@ -87,6 +87,7 @@ class _ProductsPageState extends ConsumerState<ProductsPage> {
                           child: Image.memory(
                             base64Decode(product.imageBase64),
                             fit: BoxFit.cover,
+                            gaplessPlayback: true,
                           ),
                         ),
                       ),
@@ -97,9 +98,12 @@ class _ProductsPageState extends ConsumerState<ProductsPage> {
                       subtitle: Text(
                         product.description,
                         style: const TextStyle(fontSize: 12, color: Colors.grey),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
                       ),
                       trailing: Text(
-                        "${adminRepository.currencyList.isEmpty ? "" : adminRepository.currencyList.where((element) => element.id == product.currencyId).first.symbol} ${product.price}",
+                        "${adminRepository.currencyList.isEmpty ? "" : adminRepository.currencyList.where((element) => element.id == product.currencyId).first.symbol}${product.price}",
                         style: const TextStyle(fontSize: 14, color: secondaryColor),
                       ),
                       onTap: () {
