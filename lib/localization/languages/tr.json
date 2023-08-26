@@ -44,5 +44,8 @@
     "home": "Ana Sayfa",
     "orders": "Siparişler",
     "profile": "Profil",
-    "basket": "Sepet"
+    "basket": "Sepet",
+    "cannot_add_more": "Bu üründen daha fazla ekleyemezsin!",
+    "complete_order": "Siparişi Tamamla",
+    "product_has_been_added": "Ürün sepete eklendi."
 }

@@ -45,4 +45,7 @@ class StringKeys {
   static String orders = 'orders';
   static String profile = 'profile';
   static String basket = 'basket';
+  static String cannotAddMore = 'cannot_add_more';
+  static String completeOrder = 'complete_order';
+  static String productHasBeenAdded = 'product_has_been_added';
 }

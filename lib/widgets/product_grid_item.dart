@@ -30,6 +30,7 @@ class ProductGridItem extends StatelessWidget {
                 child: Image.memory(
                   base64Decode(product.imageBase64),
                   fit: BoxFit.cover,
+                  gaplessPlayback: true,
                 ),
               ),
             ),
@@ -41,15 +42,17 @@ class ProductGridItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Center(
-                        child: Text(
-                          product.name,
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: true,
-                          maxLines: 2,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                        child: FittedBox(
+                          child: Text(
+                            product.name,
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),

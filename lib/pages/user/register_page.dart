@@ -5,7 +5,6 @@ import 'package:jointact_case_study/components/text_form_field_component.dart';
 import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/constants/string_constants.dart';
 import 'package:jointact_case_study/helpers/app_functions.dart';
-import 'package:jointact_case_study/helpers/shared_preferences_helper.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
 import 'package:jointact_case_study/models/user_model.dart';
 import 'package:jointact_case_study/pages/user/navigation_page.dart';
@@ -82,7 +81,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 text: getTranslated(context, StringKeys.register),
                 isWide: true,
                 isLoading: isLoading,
-                onPressed: () {
+                onPressed: () async {
                   if (_checkInformations()) {
                     setState(() {
                       isLoading = true;
@@ -94,16 +93,14 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                       phone: phoneTextEditingController.text.trim(),
                       mail: mailTextEditingController.text.trim(),
                     );
-                    userRepository.createUser(userModel).then((response) async {
+                    await userRepository.createUser(userModel).then((response) async {
                       if (response.isSuccessful) {
-                        await SharedPreferencesHelper.setString("createdUserModel", userModel.toJson()).then((value) {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const NavigationPage(),
-                              ),
-                              (route) => false);
-                        });
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const NavigationPage(),
+                            ),
+                            (route) => false);
                       }
                     });
                   }

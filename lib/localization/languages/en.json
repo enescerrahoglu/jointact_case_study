@@ -44,5 +44,8 @@
     "home": "Home",
     "orders": "Orders",
     "profile": "Profile",
-    "basket": "Basket"
+    "basket": "Basket",
+    "cannot_add_more": "You cannot add more of this product!",
+    "complete_order": "Complete Order",
+    "product_has_been_added": "The product has been added to the cart."
 }
