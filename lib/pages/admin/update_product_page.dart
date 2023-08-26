@@ -260,6 +260,7 @@ class _UpdateProductPageState extends ConsumerState<UpdateProductPage> {
                                             : Image.memory(
                                                 base64Decode(adminRepository.selectedProduct!.imageBase64),
                                                 fit: BoxFit.cover,
+                                                gaplessPlayback: true,
                                               ),
                                       ),
                                     ),

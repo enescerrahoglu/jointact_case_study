@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/constants/string_constants.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
 import 'package:jointact_case_study/pages/user/order_detail_page.dart';
@@ -24,33 +25,39 @@ class _OrdersPageState extends ConsumerState<OrdersPage> {
         title: getTranslated(context, StringKeys.orders),
         leadingIcon: Icons.arrow_back_ios_rounded,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: userRepository.orderList.map((order) {
-            // DateTime dateTime = DateFormat("dd.MM.yyyy HH:mm").parse(order.time.toString());
-            DateTime dateTime = DateTime.parse(order.time.toString());
-            String newFormat = DateFormat('dd.MM.yyyy HH:mm').format(dateTime);
-            return ListTile(
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-              title: Text(newFormat),
-              trailing: const Padding(
-                padding: EdgeInsets.zero,
-                child: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey),
+      body: userRepository.orderList.isNotEmpty
+          ? SingleChildScrollView(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: userRepository.orderList.map((order) {
+                  DateTime dateTime = DateTime.parse(order.time.toString());
+                  String newFormat = DateFormat('dd.MM.yyyy HH:mm').format(dateTime);
+                  return ListTile(
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                    title: Text(newFormat),
+                    trailing: const Padding(
+                      padding: EdgeInsets.zero,
+                      child: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey),
+                    ),
+                    onTap: () {
+                      userRepository.selectedOrder = order;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const OrderDetailPage(),
+                        ),
+                      );
+                    },
+                  );
+                }).toList(),
               ),
-              onTap: () {
-                userRepository.selectedOrder = order;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const OrderDetailPage(),
-                  ),
-                );
-              },
-            );
-          }).toList(),
-        ),
-      ),
+            )
+          : Center(
+              child: Text(
+                getTranslated(context, StringKeys.noOrder),
+                style: const TextStyle(fontWeight: FontWeight.bold, color: primaryColor),
+              ),
+            ),
     );
   }
 }
