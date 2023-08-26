@@ -51,4 +51,5 @@ class StringKeys {
   static String cartIsEmpty = 'cart_is_empty';
   static String errorFetchingOrders = 'error_fetching_orders';
   static String orderDetail = 'order_detail';
+  static String noOrder = 'no_order';
 }

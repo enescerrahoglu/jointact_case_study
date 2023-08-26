@@ -50,5 +50,6 @@
     "complete_order": "Complete Order",
     "product_has_been_added": "The product has been added to the cart.",
     "cart_is_empty": "The cart is empty!",
-    "order_detail": "Order Detail"
+    "order_detail": "Order Detail",
+    "no_order": "No orders!"
 }
