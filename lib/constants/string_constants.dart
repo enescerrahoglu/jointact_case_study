@@ -1,6 +1,6 @@
 class StringKeys {
   static String admin = 'admin';
-  static String customer = 'customer';
+  static String user = 'user';
   static String createCategory = 'create_category';
   static String updateCategory = 'update_category';
   static String deleteCategory = 'delete_category';
@@ -36,4 +36,13 @@ class StringKeys {
   static String errorFetchingProducts = 'error_fetching_products';
   static String errorFetchingCurrencies = 'error_fetching_currencies';
   static String logOut = 'log_out';
+  static String name = 'name';
+  static String surname = 'surname';
+  static String phone = 'phone';
+  static String mail = 'mail';
+  static String register = 'register';
+  static String home = 'home';
+  static String orders = 'orders';
+  static String profile = 'profile';
+  static String basket = 'basket';
 }
