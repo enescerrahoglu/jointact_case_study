@@ -1,6 +1,6 @@
 {
     "admin": "Admin",
-    "customer": "Customer",
+    "user": "User",
     "create_category": "Create Category",
     "update_category": "Update Category",
     "delete_category": "Delete Category",
@@ -35,5 +35,14 @@
     "error_fetching_categories": "An error occurred while fetching categories!",
     "error_fetching_products": "An error occurred while fetching products!",
     "error_fetching_currencies": "An error occurred while fetching currencies!",
-    "log_out": "Log out"
+    "log_out": "Log out",
+    "name": "Name",
+    "surname": "Surname",
+    "phone": "Phone",
+    "mail": "Mail",
+    "register": "Register",
+    "home": "Home",
+    "orders": "Orders",
+    "profile": "Profile",
+    "basket": "Basket"
 }

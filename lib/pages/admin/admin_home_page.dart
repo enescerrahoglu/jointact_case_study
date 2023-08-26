@@ -6,6 +6,7 @@ import 'package:jointact_case_study/constants/string_constants.dart';
 import 'package:jointact_case_study/helpers/app_functions.dart';
 import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
+import 'package:jointact_case_study/pages/admin/update_product_page.dart';
 import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/admin_repository.dart';
 import 'package:jointact_case_study/widgets/admin_navigation_drawer.dart';
@@ -235,7 +236,19 @@ class _AdminHomePageState extends ConsumerState<AdminHomePage> {
                                     .where((element) => element.categoryId == selectedCategoryId)
                                     .toList()[index]
                                 : adminRepository.productList[index];
-                            return ProductGridItem(product: product, adminRepository: adminRepository);
+                            return ProductGridItem(
+                              product: product,
+                              currencyList: adminRepository.currencyList,
+                              onTap: () {
+                                adminRepository.selectedProduct = product;
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const UpdateProductPage(),
+                                  ),
+                                );
+                              },
+                            );
                           },
                           itemCount: selectedCategoryId != null
                               ? adminRepository.productList

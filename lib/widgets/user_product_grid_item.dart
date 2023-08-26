@@ -5,11 +5,11 @@ import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:jointact_case_study/models/currency_model.dart';
 import 'package:jointact_case_study/models/product_model.dart';
 
-class ProductGridItem extends StatelessWidget {
+class UserProductGridItem extends StatelessWidget {
   final ProductModel product;
   final Function()? onTap;
   final List<CurrencyModel> currencyList;
-  const ProductGridItem({super.key, required this.product, required this.onTap, required this.currencyList});
+  const UserProductGridItem({super.key, required this.product, required this.onTap, required this.currencyList});
 
   @override
   Widget build(BuildContext context) {

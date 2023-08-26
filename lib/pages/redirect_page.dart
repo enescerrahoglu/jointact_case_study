@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/constants/image_constants.dart';
 import 'package:jointact_case_study/constants/string_constants.dart';
+import 'package:jointact_case_study/helpers/shared_preferences_helper.dart';
 import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
+import 'package:jointact_case_study/models/user_model.dart';
 import 'package:jointact_case_study/pages/admin/admin_home_page.dart';
-import 'package:jointact_case_study/pages/customer/customer_home_page.dart';
+import 'package:jointact_case_study/pages/user/navigation_page.dart';
+import 'package:jointact_case_study/pages/user/register_page.dart';
+import 'package:jointact_case_study/providers/providers.dart';
+import 'package:jointact_case_study/repositories/user_repository.dart';
 
-class RedirectPage extends StatefulWidget {
+class RedirectPage extends ConsumerStatefulWidget {
   const RedirectPage({super.key});
 
   @override
-  State<RedirectPage> createState() => _RedirectPageState();
+  ConsumerState<RedirectPage> createState() => _RedirectPageState();
 }
 
-class _RedirectPageState extends State<RedirectPage> {
+class _RedirectPageState extends ConsumerState<RedirectPage> {
   @override
   Widget build(BuildContext context) {
+    UserRepository userRepository = ref.watch(userProvider);
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
@@ -46,14 +53,30 @@ class _RedirectPageState extends State<RedirectPage> {
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(10),
-                    onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CustomerHomePage(),
-                        ),
-                        (route) => false,
-                      );
+                    onTap: () async {
+                      await SharedPreferencesHelper.getString("createdUserModel").then((value) {
+                        String? createdUserJson = value;
+                        if (createdUserJson != null) {
+                          userRepository.createdUserModel = UserModel.fromJson(createdUserJson);
+                          if (userRepository.createdUserModel != null) {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const NavigationPage(),
+                              ),
+                              (route) => false,
+                            );
+                          }
+                        } else {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const RegisterPage(),
+                            ),
+                            (route) => false,
+                          );
+                        }
+                      });
                     },
                     child: Container(
                       padding: const EdgeInsets.all(10),
@@ -70,7 +93,7 @@ class _RedirectPageState extends State<RedirectPage> {
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            getTranslated(context, StringKeys.customer),
+                            getTranslated(context, StringKeys.user),
                             style: const TextStyle(
                               color: primaryColor,
                               fontWeight: FontWeight.bold,

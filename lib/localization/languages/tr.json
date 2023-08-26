@@ -1,6 +1,6 @@
 {
     "admin": "Yönetici",
-    "customer": "Müşteri",
+    "user": "Kullanıcı",
     "create_category": "Kategori Ekle",
     "update_category": "Kategori Güncelle",
     "delete_category": "Kategori Sil",
@@ -35,5 +35,14 @@
     "error_fetching_categories": "Kategoriler getirilirken bir hata oluştu!",
     "error_fetching_products": "Ürünler getirilirken bir hata oluştu!",
     "error_fetching_currencies": "Para birimleri getirilirken bir hata oluştu!",
-    "log_out": "Çıkış yap"
+    "log_out": "Çıkış yap",
+    "name": "Ad",
+    "surname": "Soyad",
+    "phone": "Telefon",
+    "mail": "Mail",
+    "register": "Kaydol",
+    "home": "Ana Sayfa",
+    "orders": "Siparişler",
+    "profile": "Profil",
+    "basket": "Sepet"
 }
