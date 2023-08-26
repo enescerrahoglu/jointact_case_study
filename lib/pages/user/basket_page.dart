@@ -25,7 +25,6 @@ class _BasketPageState extends ConsumerState<BasketPage> {
   @override
   Widget build(BuildContext context) {
     UserRepository userRepository = ref.watch(userProvider);
-    userRepository.selectedCategory == null;
     return Scaffold(
       appBar: AppBarWidget(
         title: getTranslated(context, StringKeys.basket),
@@ -69,111 +68,118 @@ class _BasketPageState extends ConsumerState<BasketPage> {
               ),
             )
           : null,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: userRepository.basketProducts.map((basketProduct) {
-            return ListTile(
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-              leading: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: Image.memory(
-                    base64Decode(basketProduct.productModel.imageBase64),
-                    fit: BoxFit.cover,
-                    gaplessPlayback: true,
-                  ),
-                ),
-              ),
-              title: Text(
-                basketProduct.productModel.name,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(
-                "${userRepository.currencyList.isEmpty ? "" : userRepository.currencyList.where((element) => element.id == basketProduct.productModel.currencyId).first.symbol}${basketProduct.productModel.price * basketProduct.count}",
-                style: const TextStyle(fontSize: 12, color: primaryColor),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: itemBackgroundColor,
-                      shape: BoxShape.circle,
-                      boxShadow: UIHelper.boxShadow,
-                    ),
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(50)),
-                      child: Material(
-                        child: InkWell(
-                          onTap: () {
-                            ref.read(userProvider).removeProductFromBasket(basketProduct.productModel);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            child: Icon(
-                              basketProduct.count > 1 ? CupertinoIcons.minus : CupertinoIcons.trash_fill,
-                              color: basketProduct.count > 1 ? primaryColor : Colors.red,
-                              size: 20,
-                            ),
-                          ),
+      body: userRepository.basketProducts.isNotEmpty
+          ? SingleChildScrollView(
+              padding: const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 90),
+              child: Column(
+                children: userRepository.basketProducts.map((basketProduct) {
+                  return ListTile(
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                    leading: ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Image.memory(
+                          base64Decode(basketProduct.productModel.imageBase64),
+                          fit: BoxFit.cover,
+                          gaplessPlayback: true,
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    width: 30,
-                    padding: const EdgeInsets.all(5),
-                    child: Text(
-                      basketProduct.count.toString(),
-                      style: const TextStyle(fontSize: 16, color: secondaryColor),
-                      textAlign: TextAlign.center,
+                    title: Text(
+                      basketProduct.productModel.name,
+                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: itemBackgroundColor,
-                      shape: BoxShape.circle,
-                      boxShadow: UIHelper.boxShadow,
+                    subtitle: Text(
+                      "${userRepository.currencyList.isEmpty ? "" : userRepository.currencyList.where((element) => element.id == basketProduct.productModel.currencyId).first.symbol}${basketProduct.productModel.price * basketProduct.count}",
+                      style: const TextStyle(fontSize: 12, color: primaryColor),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
                     ),
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(50)),
-                      child: Material(
-                        child: InkWell(
-                          onTap: () {
-                            ref.read(userProvider).addProductToBasket(basketProduct.productModel, context);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            child: const Icon(
-                              CupertinoIcons.plus,
-                              color: primaryColor,
-                              size: 20,
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: itemBackgroundColor,
+                            shape: BoxShape.circle,
+                            boxShadow: UIHelper.boxShadow,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.all(Radius.circular(50)),
+                            child: Material(
+                              child: InkWell(
+                                onTap: () {
+                                  ref.read(userProvider).removeProductFromBasket(basketProduct.productModel);
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(5),
+                                  child: Icon(
+                                    basketProduct.count > 1 ? CupertinoIcons.minus : CupertinoIcons.trash_fill,
+                                    color: basketProduct.count > 1 ? primaryColor : Colors.red,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                        Container(
+                          width: 30,
+                          padding: const EdgeInsets.all(5),
+                          child: Text(
+                            basketProduct.count.toString(),
+                            style: const TextStyle(fontSize: 16, color: secondaryColor),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: itemBackgroundColor,
+                            shape: BoxShape.circle,
+                            boxShadow: UIHelper.boxShadow,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.all(Radius.circular(50)),
+                            child: Material(
+                              child: InkWell(
+                                onTap: () {
+                                  ref.read(userProvider).addProductToBasket(basketProduct.productModel, context);
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(5),
+                                  child: const Icon(
+                                    CupertinoIcons.plus,
+                                    color: primaryColor,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    onTap: () {
+                      userRepository.selectedProduct = basketProduct.productModel;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProductDetailPage(),
+                        ),
+                      );
+                    },
+                  );
+                }).toList(),
               ),
-              onTap: () {
-                userRepository.selectedProduct = basketProduct.productModel;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProductDetailPage(),
-                  ),
-                );
-              },
-            );
-          }).toList(),
-        ),
-      ),
+            )
+          : Center(
+              child: Text(
+                getTranslated(context, StringKeys.cartIsEmpty),
+                style: const TextStyle(fontWeight: FontWeight.bold, color: primaryColor),
+              ),
+            ),
     );
   }
 }

@@ -21,7 +21,6 @@ class _ProductDetailPageState extends ConsumerState<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     UserRepository userRepository = ref.watch(userProvider);
-    userRepository.selectedCategory == null;
     return Scaffold(
       appBar: AppBarWidget(
         title: userRepository.selectedProduct?.name ?? "",

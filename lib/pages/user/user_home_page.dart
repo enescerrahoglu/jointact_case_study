@@ -197,6 +197,13 @@ class _UserHomePageState extends ConsumerState<UserHomePage> {
             backgroundColor: dangerDark, icon: Icons.cancel);
       }
     });
+
+    await ref.read(userProvider).getOrdersForUserId().then((response) {
+      if (response.isSuccessful == false) {
+        AppFunctions.showSnackbar(context, getTranslated(context, StringKeys.errorFetchingOrders),
+            backgroundColor: dangerDark, icon: Icons.cancel);
+      }
+    });
     ref.read(userProvider).setLoading(false);
   }
 }
