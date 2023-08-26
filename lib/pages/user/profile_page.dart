@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/constants/image_constants.dart';
 import 'package:jointact_case_study/constants/string_constants.dart';
-import 'package:jointact_case_study/helpers/shared_preferences_helper.dart';
 import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
 import 'package:jointact_case_study/pages/redirect_page.dart';
@@ -118,15 +117,13 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
               content: getTranslated(context, StringKeys.logOut),
               iconData: CupertinoIcons.square_arrow_left_fill,
               onTap: () async {
-                await SharedPreferencesHelper.remove("createdUserModel").then((value) {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RedirectPage(),
-                    ),
-                    (route) => false,
-                  );
-                });
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RedirectPage(),
+                  ),
+                  (route) => false,
+                );
               },
             ),
           ],

@@ -48,4 +48,7 @@ class StringKeys {
   static String cannotAddMore = 'cannot_add_more';
   static String completeOrder = 'complete_order';
   static String productHasBeenAdded = 'product_has_been_added';
+  static String cartIsEmpty = 'cart_is_empty';
+  static String errorFetchingOrders = 'error_fetching_orders';
+  static String orderDetail = 'order_detail';
 }

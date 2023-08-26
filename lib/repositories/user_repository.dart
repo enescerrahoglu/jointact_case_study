@@ -27,6 +27,7 @@ class UserRepository extends ChangeNotifier {
   UserModel? createdUserModel;
   List<BasketProductModel> basketProducts = [];
   List<OrderModel> orderList = [];
+  OrderModel? selectedOrder;
 
   void setLoading(bool value) {
     isLoading = value;
@@ -104,53 +105,6 @@ class UserRepository extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Future<ResponseModel> createOrder(OrderModel orderModel, List<int> productIds) async {
-  //   final url = Uri.parse('$_baseURL/App/CreateOrder');
-  //   final headers = {'Content-Type': 'application/json'};
-  //   final body = jsonEncode({
-  //     "devKey": _devKey,
-  //     "time": orderModel.time,
-  //     "userId": orderModel.userId,
-  //     "productIds": productIds,
-  //   });
-
-  //   try {
-  //     final response = await http.post(url, headers: headers, body: body);
-  //     if (response.statusCode == 200) {
-  //       final Map<String, dynamic> responseData = json.decode(response.body);
-  //       final responseModel = ResponseModel.fromJson(responseData);
-
-  //       if (responseModel.isSuccessful) {
-  //         // orderList.add(OrderModel.fromMap(responseModel.data));
-  //         OrderModel order = OrderModel(
-  //           id: responseModel.data['id'],
-  //           time: responseModel.data['time'],
-  //           userId: responseModel.data['userId'],
-  //           items: [],
-  //         );
-  //         List<dynamic> itemsData = responseModel.data['items'];
-  //         List<ItemModel> itemModels = itemsData.map<ItemModel>((itemData) {
-  //           return ItemModel(
-  //             id: itemData['id'],
-  //             orderId: itemData['orderId'],
-  //             productId: itemData['productId'],
-  //           );
-  //         }).toList();
-  //         order.items.addAll(itemModels);
-  //         orderList.add(order);
-  //         basketProducts.clear();
-  //         notifyListeners();
-  //       }
-  //       return responseModel;
-  //     } else {
-  //       return ResponseModel.fromJson(json.decode(response.body));
-  //     }
-  //   } catch (e) {
-  //     debugPrint('Failed createOrder(): $e');
-  //     throw Exception([e]);
-  //   }
-  // }
-
   Future<ResponseModel> createOrder(OrderModel orderModel, List<int> productIds) async {
     final url = Uri.parse('$_baseURL/App/CreateOrder');
     final headers = {'Content-Type': 'application/json'};
@@ -197,8 +151,8 @@ class UserRepository extends ChangeNotifier {
           final Map<String, dynamic> responseData = json.decode(response.body);
           final responseModel = ResponseModel.fromJson(responseData);
 
-          for (var orderMap in responseModel.data["orders"]) {
-            orderList.add(OrderModel.fromMap(orderMap));
+          for (var orderJson in responseModel.data["orders"]) {
+            orderList.add(OrderModel.fromJson(orderJson));
           }
           notifyListeners();
 

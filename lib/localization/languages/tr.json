@@ -35,6 +35,7 @@
     "error_fetching_categories": "Kategoriler getirilirken bir hata oluştu!",
     "error_fetching_products": "Ürünler getirilirken bir hata oluştu!",
     "error_fetching_currencies": "Para birimleri getirilirken bir hata oluştu!",
+    "error_fetching_orders": "Siparişler getirilirken bir hata oluştu!",
     "log_out": "Çıkış yap",
     "name": "Ad",
     "surname": "Soyad",
@@ -47,5 +48,7 @@
     "basket": "Sepet",
     "cannot_add_more": "Bu üründen daha fazla ekleyemezsin!",
     "complete_order": "Siparişi Tamamla",
-    "product_has_been_added": "Ürün sepete eklendi."
+    "product_has_been_added": "Ürün sepete eklendi.",
+    "cart_is_empty": "Sepet boş!",
+    "order_detail": "Sipariş Detayı"
 }
