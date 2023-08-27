@@ -8,6 +8,8 @@ import 'package:jointact_case_study/localization/app_localization.dart';
 import 'package:jointact_case_study/pages/admin/admin_home_page.dart';
 import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 
+/// Bu sayfa admin paneline girmek için basit bir doğrulama yapısı sunar.
+/// Eğer kullanıcı belirlenen devKey değerini doğru olarak girerse admin paneline yönlendirilir.
 class VerifyPage extends StatefulWidget {
   const VerifyPage({super.key});
 

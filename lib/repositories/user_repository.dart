@@ -14,6 +14,20 @@ import 'package:jointact_case_study/models/response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:jointact_case_study/models/user_model.dart';
 
+/// Bu sınıf, kullanıcı işlemlerini yönetir ve ilgili verilerin alınması, oluşturulması, güncellenmesi ve silinmesini sağlar.
+/// Ürünler, sepet ürünleri, siparişler gibi model sınıfları üzerinde işlemler yapılır.
+///
+/// Temel Fonksiyonlar:
+///
+/// - Kullanıcı İşlemleri: Yeni kullanıcı oluşturulabilir.
+/// - Sepet İşlemleri: Ürünler sepete eklenebilir veya çıkarılabilir.
+/// - Sipariş İşlemleri: Sipariş oluşturulabilir ve kullanıcıya ait siparişler alınabilir.
+/// - Kategori İşlemleri: Kategori listesi alınabilir.
+/// - Ürün İşlemleri: Ürün listesi alınabilir.
+/// - Para Birimi İşlemleri: Para birimi listesi alınabilir.
+///
+/// Tüm veritabanı işlemleri HTTP istekleri kullanılarak gerçekleştirilir ve gerekli güncellemeler yapıldığında `notifyListeners()` çağrısı
+/// kullanılarak değişiklikler bildirilir ve kullanılan yerlerde yapının güncellenmesi sağlanır.
 class UserRepository extends ChangeNotifier {
   final String _baseURL = 'https://api.jointact.com';
   final String _devKey = '833F0ACB-49F7-451C-A0C7-1EA68FDC5B6B';

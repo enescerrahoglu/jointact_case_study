@@ -14,6 +14,13 @@ import 'package:jointact_case_study/widgets/dropdown_item_widget.dart';
 import 'package:jointact_case_study/widgets/loading_widget.dart';
 import 'package:jointact_case_study/widgets/product_grid_item.dart';
 
+/// Bu sayfa, yöneticilerin para birimlerini, kategorileri ve ürünleri görüntüleyebileceği ve yönetebileceği ana sayfadır.
+/// Ürün kategorileri ve ürünler görüntülenebilir, filtrenebilir.
+/// Her bir ürün değerine tıklandığında o ürün için güncelleme sayfasına yönlendirilir.
+/// Drawer (soldan açılan menü) ile diğer sayfalara yönlendirme işlmeleri sağlanır.
+/// Drawer widgetı lib > widgets klasörü altında oluşturulmuştur.
+/// Drawer ile kategoriler, ürünler, ayarlar sayfalarına yönlendiren ve
+/// çıkış yapmayı sağlayan tıklanabilir yapılar bulunmaktadır.
 class AdminHomePage extends ConsumerStatefulWidget {
   const AdminHomePage({super.key});
 
@@ -32,11 +39,6 @@ class _AdminHomePageState extends ConsumerState<AdminHomePage> {
     Future.delayed(Duration.zero, () async {
       await getData();
     });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override

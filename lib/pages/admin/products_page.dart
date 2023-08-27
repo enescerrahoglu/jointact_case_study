@@ -13,6 +13,9 @@ import 'package:jointact_case_study/repositories/admin_repository.dart';
 import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 import 'package:jointact_case_study/widgets/loading_widget.dart';
 
+/// Bu sayfa eklenen bütün ürünleri listelemektedir.
+/// Listelenen ürünlere tıklanarak o ürün için güncelleme sayfasına yönlendirme sağlanır.
+/// Yeni ürün ekleme sayfasına bir FloatingActionButton yardımıyla gidilir.
 class ProductsPage extends ConsumerStatefulWidget {
   const ProductsPage({super.key});
 

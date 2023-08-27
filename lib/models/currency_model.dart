@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+/// Para birimlerini temsil eden [CurrencyModel] sınıfı, para birimi
+/// bilgilerini içeren ve JSON formatına dönüştürülebilen bir yapı sunar.
 class CurrencyModel {
   final int id;
   final String name;

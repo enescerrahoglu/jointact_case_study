@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jointact_case_study/constants/color_constants.dart';
 
+/// Bu sınıf, özellikle veri tabanı işlemlerinde işlem gerçekleşene kadar
+/// kullanıcıyı bekleten ve başka bir aksiyon yapmasını engelleyen bir yapıda
+/// loading animasyonu sunar.
 class LoadingWidget extends StatefulWidget {
   final bool isLoading;
   const LoadingWidget({super.key, required this.isLoading});

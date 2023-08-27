@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+/// Ürünleri temsil eden [ProductModel] sınıfı, ürün bilgilerini içeren ve
+/// JSON formatına dönüştürülebilen bir yapı sunar.
 class ProductModel {
   final int id;
   int categoryId;

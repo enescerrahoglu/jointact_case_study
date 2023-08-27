@@ -7,6 +7,8 @@ import 'package:jointact_case_study/localization/language_localization.dart';
 import 'package:jointact_case_study/main.dart';
 import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 
+/// Bu sayfa admin ve user için ortak ayarları barındırır.
+/// Sayfada uygulama dilini değiştirmeyi sağlayan bir yapı bulunmaktadır.
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 

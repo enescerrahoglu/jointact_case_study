@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jointact_case_study/constants/color_constants.dart';
 
+/// Bu widget projenin genelinde ortak bir AppBar sunmak için geliştirilmiştir.
+/// Genel değişiklikler (örneğin arkaplan rengi) sadece burada yapılarak tüm uygulamada etkisini gösterir.
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final IconData? leadingIcon;

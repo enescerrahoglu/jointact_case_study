@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+/// Ürün kategorilerini temsil eden [CategoryModel] sınıfı, kategori bilgilerini
+/// içeren ve JSON formatına dönüştürülebilen bir yapı sunar.
 class CategoryModel {
   final int id;
   String name;

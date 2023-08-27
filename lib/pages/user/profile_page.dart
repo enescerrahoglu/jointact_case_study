@@ -14,6 +14,8 @@ import 'package:jointact_case_study/repositories/user_repository.dart';
 import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 import 'package:jointact_case_study/widgets/list_tile_widget.dart';
 
+/// Bu sayfa kayıt olan kullanıcın bilgilerini gösterir.
+/// Ayrıca siparişler ve ayarlar sayfalarına yönlendirme yapan ve çıkış yapmayı sağlayan tıklanabilir yapılar içerir.
 class ProfilePage extends ConsumerStatefulWidget {
   const ProfilePage({super.key});
 

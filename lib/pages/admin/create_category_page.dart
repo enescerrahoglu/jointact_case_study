@@ -12,6 +12,7 @@ import 'package:jointact_case_study/repositories/admin_repository.dart';
 import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 import 'package:jointact_case_study/widgets/loading_widget.dart';
 
+/// Bu sayfa yeni bir kategori eklemek için gerekli yapıları içerir.
 class CreateCategoryPage extends ConsumerStatefulWidget {
   const CreateCategoryPage({super.key});
 

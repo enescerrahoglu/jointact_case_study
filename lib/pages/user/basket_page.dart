@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +13,11 @@ import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/user_repository.dart';
 import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 
+/// Bu sayfa, kullanıcının sepete eklediği ürünleri görüntülemesi ve siparişi tamamlaması için tasarlanmıştır.
+///
+/// Kullanıcı, sepetindeki ürünleri görüntüleyebilir, ürün sayısını düzenleyebilir veya ürünü
+/// sepetten çıkarabilir. Ayrıca, sepetindeki ürünler ile sipariş oluşturabilir.
+/// Eğer kullanıcının sepeti boş ise kullanıcıya bir uyarı mesajı gösterilir.
 class BasketPage extends ConsumerStatefulWidget {
   const BasketPage({super.key});
 

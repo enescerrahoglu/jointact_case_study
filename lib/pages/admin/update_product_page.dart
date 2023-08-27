@@ -17,6 +17,7 @@ import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 import 'package:jointact_case_study/widgets/dropdown_item_widget.dart';
 import 'package:jointact_case_study/widgets/loading_widget.dart';
 
+/// Bu sayfa seçilen ürün değerini güncellemeyi sağlayan yapılar içerir.
 class UpdateProductPage extends ConsumerStatefulWidget {
   const UpdateProductPage({super.key});
 

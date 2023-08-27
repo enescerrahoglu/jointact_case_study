@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
+/// Dil lokalizasyonunu sağlayan [Localization] sınıfı, uygulamanın
+/// farklı dillerde metinleri desteklemesini sağlamak için kullanılır.
 class Localization {
   final Locale locale;
 

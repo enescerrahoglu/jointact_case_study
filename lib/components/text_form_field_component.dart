@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/helpers/ui_helper.dart';
 
+/// Bu widget classı kişiselleştirilmiş bir TextFormField yapısı sunmaktadır.
 class TextFormFieldComponent extends StatefulWidget {
   final BuildContext context;
   final TextEditingController textEditingController;

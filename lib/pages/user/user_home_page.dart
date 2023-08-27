@@ -12,6 +12,12 @@ import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 import 'package:jointact_case_study/widgets/dropdown_item_widget.dart';
 import 'package:jointact_case_study/widgets/user_product_grid_item.dart';
 
+/// Bu sayfada kategoriler ve ürünler yer almaktadır.
+/// Kategoriler bir dropdown widgetı ile listelenir.
+/// Ürünler GridView widgetı ile listelenir.
+/// Seçilen kategoriye göre ürün listesi filtrelenerek gösterilir.
+/// İstenildiği takdirde filtre kaldırılabilir.
+/// Her bir ürün UserProductGridItem() widgetı ile gösterilir.
 class UserHomePage extends ConsumerStatefulWidget {
   const UserHomePage({super.key});
 

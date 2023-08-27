@@ -12,6 +12,10 @@ import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/user_repository.dart';
 import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 
+/// Bu sayfa kullanıcının kaydolması için doldurması gereken alanları içerir.
+/// Bir buton ile doğrulama yapılarak kullanıcının kaydolması sağlanır ve
+/// kullanıcı NavigationPage sayfasına yönlendirilir.
+/// Başarıyla kaydolan UserModel nesnesi SharedPreferences ile cihaz hafızasına kaydedilir.
 class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
 

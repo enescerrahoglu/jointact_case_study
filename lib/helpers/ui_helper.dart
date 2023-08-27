@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Yardımcı işlevleri içeren [UIHelper] sınıfı, kullanıcı arayüzü
+/// bileşenlerinin boyutları ve özellikleriyle ilgili işlemleri
+/// kolaylaştırmak için geliştirilmiştir.
 class UIHelper {
   static double getDeviceHeight(BuildContext context) {
     return MediaQuery.of(context).size.height;
