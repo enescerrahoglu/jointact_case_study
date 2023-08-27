@@ -51,5 +51,7 @@
     "product_has_been_added": "Ürün sepete eklendi.",
     "cart_is_empty": "Sepet boş!",
     "order_detail": "Sipariş Detayı",
-    "no_order": "Sipariş yok!"
+    "no_order": "Sipariş yok!",
+    "verify": "Doğrula",
+    "wrong_attempt": "Hatalı deneme!"
 }
