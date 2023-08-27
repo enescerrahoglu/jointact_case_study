@@ -5,6 +5,7 @@ Projeye ait ekran kaydını ve ekran görüntülerini aşağıda bulabilirsiniz.
 [![Watch the video](https://firebasestorage.googleapis.com/v0/b/paylash-app.appspot.com/o/user_register_app%2Fclick_for_play.png?alt=media&token=3bff6c74-ac7c-401f-b40c-fda8f91c2bd9)](https://firebasestorage.googleapis.com/v0/b/enes-cerrahoglu.appspot.com/o/JointActCaseStudy%2FScreen_Recording_20230827_153242.mp4?alt=media&token=6d5b0186-c59a-4f39-bc3f-49eca4efefc9)
 
 # Admin
+.
 <img src="https://firebasestorage.googleapis.com/v0/b/enes-cerrahoglu.appspot.com/o/JointActCaseStudy%2FScreenshot_20230827_152056.jpg?alt=media&token=ed28f956-9519-4a1f-98be-09f162e8d244" height="500">
 <img src="https://firebasestorage.googleapis.com/v0/b/enes-cerrahoglu.appspot.com/o/JointActCaseStudy%2FScreenshot_20230827_151728.jpg?alt=media&token=4fde6cfa-4bca-4399-93c2-679c57e8d8cd" height="500">
 <img src="https://firebasestorage.googleapis.com/v0/b/enes-cerrahoglu.appspot.com/o/JointActCaseStudy%2FScreenshot_20230827_151736.jpg?alt=media&token=48282582-d1fe-48db-b896-0ac60c0b5832" height="500">
@@ -18,6 +19,7 @@ Projeye ait ekran kaydını ve ekran görüntülerini aşağıda bulabilirsiniz.
 <img src="https://firebasestorage.googleapis.com/v0/b/enes-cerrahoglu.appspot.com/o/JointActCaseStudy%2FScreenshot_20230827_152033.jpg?alt=media&token=8d62a740-a613-4735-ad0d-2d31bdda93c4" height="500">
 
 # Customer
+.
 <img src="https://firebasestorage.googleapis.com/v0/b/enes-cerrahoglu.appspot.com/o/JointActCaseStudy%2FScreenshot_20230827_152315.jpg?alt=media&token=c2000f3e-81ab-4de2-a45d-1dd1bd75f135" height="500">
 <img src="https://firebasestorage.googleapis.com/v0/b/enes-cerrahoglu.appspot.com/o/JointActCaseStudy%2FScreenshot_20230827_152125.jpg?alt=media&token=49d773ce-5d20-4182-b880-4935018f2cf5" height="500">
 <img src="https://firebasestorage.googleapis.com/v0/b/enes-cerrahoglu.appspot.com/o/JointActCaseStudy%2FScreenshot_20230827_152204.jpg?alt=media&token=10c65600-5654-401b-bec7-022f3831b55b" height="500">
