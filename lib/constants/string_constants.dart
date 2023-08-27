@@ -52,4 +52,6 @@ class StringKeys {
   static String errorFetchingOrders = 'error_fetching_orders';
   static String orderDetail = 'order_detail';
   static String noOrder = 'no_order';
+  static String verify = 'verify';
+  static String wrongAttempt = 'wrong_attempt';
 }

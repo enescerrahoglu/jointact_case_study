@@ -9,7 +9,7 @@ import 'package:jointact_case_study/helpers/shared_preferences_helper.dart';
 import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:jointact_case_study/localization/app_localization.dart';
 import 'package:jointact_case_study/models/user_model.dart';
-import 'package:jointact_case_study/pages/admin/admin_home_page.dart';
+import 'package:jointact_case_study/pages/admin/verify_page.dart';
 import 'package:jointact_case_study/pages/user/navigation_page.dart';
 import 'package:jointact_case_study/pages/user/register_page.dart';
 import 'package:jointact_case_study/providers/providers.dart';
@@ -122,7 +122,7 @@ class _RedirectPageState extends ConsumerState<RedirectPage> {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const AdminHomePage(),
+                          builder: (context) => const VerifyPage(),
                         ),
                         (route) => false,
                       );

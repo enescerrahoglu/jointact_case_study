@@ -7,8 +7,8 @@ import 'package:jointact_case_study/models/response_model.dart';
 import 'package:flutter/material.dart';
 
 class AdminRepository extends ChangeNotifier {
-  String baseURL = 'https://api.jointact.com';
-  String devKey = '833F0ACB-49F7-451C-A0C7-1EA68FDC5B6B';
+  final String _baseURL = 'https://api.jointact.com';
+  final String _devKey = '833F0ACB-49F7-451C-A0C7-1EA68FDC5B6B';
 
   List<CategoryModel> categoryList = [];
   CategoryModel? selectedCategory;
@@ -20,9 +20,9 @@ class AdminRepository extends ChangeNotifier {
 
   // Category İşlemleri
   Future<ResponseModel> getCategories() async {
-    final url = Uri.parse('$baseURL/App/GetCategories');
+    final url = Uri.parse('$_baseURL/App/GetCategories');
     final headers = {'Content-Type': 'application/json'};
-    final body = jsonEncode({'devKey': devKey});
+    final body = jsonEncode({'devKey': _devKey});
 
     try {
       categoryList.clear();
@@ -47,9 +47,9 @@ class AdminRepository extends ChangeNotifier {
   }
 
   Future<ResponseModel> createCategory(CategoryModel categoryModel) async {
-    final url = Uri.parse('$baseURL/App/CreateCategory');
+    final url = Uri.parse('$_baseURL/App/CreateCategory');
     final headers = {'Content-Type': 'application/json'};
-    final body = jsonEncode({'devKey': devKey, 'name': categoryModel.name});
+    final body = jsonEncode({'devKey': _devKey, 'name': categoryModel.name});
 
     try {
       final response = await http.post(url, headers: headers, body: body);
@@ -73,9 +73,9 @@ class AdminRepository extends ChangeNotifier {
   }
 
   Future<ResponseModel> updateCategory(CategoryModel categoryModel) async {
-    final url = Uri.parse('$baseURL/App/UpdateCategory');
+    final url = Uri.parse('$_baseURL/App/UpdateCategory');
     final headers = {'Content-Type': 'application/json'};
-    final body = jsonEncode({'devKey': devKey, 'name': categoryModel.name, "id": categoryModel.id});
+    final body = jsonEncode({'devKey': _devKey, 'name': categoryModel.name, "id": categoryModel.id});
 
     try {
       final response = await http.post(url, headers: headers, body: body);
@@ -97,9 +97,9 @@ class AdminRepository extends ChangeNotifier {
   }
 
   Future<ResponseModel> deleteCategory(int id) async {
-    final url = Uri.parse('$baseURL/App/DeleteCategory');
+    final url = Uri.parse('$_baseURL/App/DeleteCategory');
     final headers = {'Content-Type': 'application/json'};
-    final body = jsonEncode({'devKey': devKey, "id": id});
+    final body = jsonEncode({'devKey': _devKey, "id": id});
 
     try {
       final response = await http.post(url, headers: headers, body: body);
@@ -122,9 +122,9 @@ class AdminRepository extends ChangeNotifier {
 
   // Product İşlemleri
   Future<ResponseModel> getProducts() async {
-    final url = Uri.parse('$baseURL/App/GetProducts');
+    final url = Uri.parse('$_baseURL/App/GetProducts');
     final headers = {'Content-Type': 'application/json'};
-    final body = jsonEncode({'devKey': devKey});
+    final body = jsonEncode({'devKey': _devKey});
 
     try {
       productList.clear();
@@ -149,10 +149,10 @@ class AdminRepository extends ChangeNotifier {
   }
 
   Future<ResponseModel> createProduct(ProductModel productModel) async {
-    final url = Uri.parse('$baseURL/App/CreateProduct');
+    final url = Uri.parse('$_baseURL/App/CreateProduct');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({
-      'devKey': devKey,
+      'devKey': _devKey,
       "categoryId": productModel.categoryId,
       "description": productModel.description,
       "imageBase64": productModel.imageBase64,
@@ -184,10 +184,10 @@ class AdminRepository extends ChangeNotifier {
   }
 
   Future<ResponseModel> updateProduct(ProductModel productModel) async {
-    final url = Uri.parse('$baseURL/App/UpdateProduct');
+    final url = Uri.parse('$_baseURL/App/UpdateProduct');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({
-      'devKey': devKey,
+      'devKey': _devKey,
       "categoryId": productModel.categoryId,
       "description": productModel.description,
       "imageBase64": productModel.imageBase64,
@@ -219,9 +219,9 @@ class AdminRepository extends ChangeNotifier {
   }
 
   Future<ResponseModel> deleteProduct(int id) async {
-    final url = Uri.parse('$baseURL/App/DeleteProduct');
+    final url = Uri.parse('$_baseURL/App/DeleteProduct');
     final headers = {'Content-Type': 'application/json'};
-    final body = jsonEncode({'devKey': devKey, "id": id});
+    final body = jsonEncode({'devKey': _devKey, "id": id});
 
     try {
       final response = await http.post(url, headers: headers, body: body);
@@ -244,9 +244,9 @@ class AdminRepository extends ChangeNotifier {
 
   // Currency İşlemleri
   Future<ResponseModel> getCurrencies() async {
-    final url = Uri.parse('$baseURL/App/GetCurrencies');
+    final url = Uri.parse('$_baseURL/App/GetCurrencies');
     final headers = {'Content-Type': 'application/json'};
-    final body = jsonEncode({'devKey': devKey});
+    final body = jsonEncode({'devKey': _devKey});
 
     try {
       currencyList.clear();

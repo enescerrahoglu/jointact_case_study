@@ -73,7 +73,7 @@ class _UpdateProductPageState extends ConsumerState<UpdateProductPage> {
             title: getTranslated(context, StringKeys.updateProduct),
             leadingIcon: Icons.arrow_back_ios_rounded,
             actions: [
-              getDeleteIconButton(adminRepository),
+              _getDeleteIconButton(adminRepository),
             ],
           ),
           body: SingleChildScrollView(
@@ -281,7 +281,9 @@ class _UpdateProductPageState extends ConsumerState<UpdateProductPage> {
                         isLoading = true;
                       });
                       if (_selectedImage != null) {
-                        _convertToBase64();
+                        setState(() {
+                          _base64Image = AppFunctions.convertToBase64(_selectedImage!);
+                        });
                       }
                       ProductModel productModel = ProductModel(
                         id: adminRepository.selectedProduct!.id,
@@ -336,17 +338,7 @@ class _UpdateProductPageState extends ConsumerState<UpdateProductPage> {
     }
   }
 
-  void _convertToBase64() {
-    if (_selectedImage != null) {
-      final bytes = _selectedImage!.readAsBytesSync();
-      final base64String = base64Encode(bytes);
-      setState(() {
-        _base64Image = base64String;
-      });
-    }
-  }
-
-  Widget getDeleteIconButton(AdminRepository adminRepository) {
+  Widget _getDeleteIconButton(AdminRepository adminRepository) {
     return IconButton(
       onPressed: adminRepository.selectedProduct == null
           ? null

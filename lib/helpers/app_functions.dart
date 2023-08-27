@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:image_picker/image_picker.dart';
@@ -142,5 +143,11 @@ class AppFunctions {
     } catch (e) {
       throw Exception([e]);
     }
+  }
+
+  static String convertToBase64(File imageFile) {
+    final bytes = imageFile.readAsBytesSync();
+    final base64String = base64Encode(bytes);
+    return base64String;
   }
 }

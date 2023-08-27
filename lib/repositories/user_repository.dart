@@ -155,7 +155,6 @@ class UserRepository extends ChangeNotifier {
             orderList.add(OrderModel.fromJson(orderJson));
           }
           notifyListeners();
-
           return responseModel;
         } else {
           return ResponseModel.fromJson(json.decode(response.body));

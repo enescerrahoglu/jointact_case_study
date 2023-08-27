@@ -64,6 +64,11 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
         useMaterial3: true,
+        navigationBarTheme: NavigationBarThemeData(
+          labelTextStyle: MaterialStateProperty.resolveWith((state) {
+            return const TextStyle(color: primaryColor, fontSize: 12);
+          }),
+        ),
       ),
       home: const RedirectPage(),
     );

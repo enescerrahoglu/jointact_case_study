@@ -41,6 +41,8 @@ class _NavigationPageState extends ConsumerState<NavigationPage> {
                 selectedPageIndex = index;
               });
             },
+            indicatorColor: primaryColor,
+            shadowColor: Colors.transparent,
             destinations: <NavigationDestination>[
               NavigationDestination(
                 icon: const Icon(
@@ -51,7 +53,7 @@ class _NavigationPageState extends ConsumerState<NavigationPage> {
                 selectedIcon: const Icon(
                   CupertinoIcons.house_alt_fill,
                   size: 26,
-                  color: primaryColor,
+                  color: buttonForegroundColor,
                 ),
                 label: getTranslated(context, StringKeys.home),
                 tooltip: "",
@@ -65,7 +67,7 @@ class _NavigationPageState extends ConsumerState<NavigationPage> {
                 selectedIcon: const Icon(
                   CupertinoIcons.cart_fill,
                   size: 26,
-                  color: primaryColor,
+                  color: buttonForegroundColor,
                 ),
                 label: getTranslated(context, StringKeys.basket),
                 tooltip: "",
@@ -79,7 +81,7 @@ class _NavigationPageState extends ConsumerState<NavigationPage> {
                 selectedIcon: const Icon(
                   CupertinoIcons.person_solid,
                   size: 26,
-                  color: primaryColor,
+                  color: buttonForegroundColor,
                 ),
                 label: getTranslated(context, StringKeys.profile),
                 tooltip: "",
