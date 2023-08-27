@@ -15,6 +15,10 @@ import 'package:jointact_case_study/pages/user/register_page.dart';
 import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/user_repository.dart';
 
+/// Bu sayfa uygulama başlatıldığında görüntülenen varsayılan sayfadır.
+/// Sayfada admin ve user için gerekli sayfalara yönlendirmeyi sağlayan tıklanabilir yapılar bulunur.
+/// User için eğer cihaz hafızasında kayıtlı bir user yoksa RegisterPage sayfasına,
+/// varsa NavigationPage sayfasına yönlendirme sağlanır.
 class RedirectPage extends ConsumerStatefulWidget {
   const RedirectPage({super.key});
 

@@ -8,6 +8,7 @@ import 'package:jointact_case_study/models/product_model.dart';
 import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/user_repository.dart';
 
+/// Bu sınıf user için kişiselleştirilmiş ürün widgetı sunar.
 class UserProductGridItem extends ConsumerWidget {
   final ProductModel product;
   final Function()? onTap;

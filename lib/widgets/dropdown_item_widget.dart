@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Bu sınıf, DropdownButton widgetında listelenen ve seçilen itemler için
+/// kişiselleştirilmiş widgetlar sunar.
 class DropdownItemWidget {
   static DropdownMenuItem<int> getDropdownItem(String label, int value) {
     return DropdownMenuItem<int>(

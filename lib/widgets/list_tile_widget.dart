@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jointact_case_study/constants/color_constants.dart';
 
+/// Bu sınıf kişiselleştirilmiş bir ListTile widgetı sunar.
 class ListTileWidget extends StatelessWidget {
   final IconData? iconData;
   final String content;

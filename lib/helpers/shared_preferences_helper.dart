@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Bu sınıf, verileri cihaz hafızasında saklamaya, saklanan değerleri geri döndürmeye ve silmeye yönelik fonksiyonları içerir.
 class SharedPreferencesHelper {
   static Future<void> setString(String key, String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

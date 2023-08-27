@@ -13,6 +13,7 @@ import 'package:jointact_case_study/repositories/admin_repository.dart';
 import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 import 'package:jointact_case_study/widgets/loading_widget.dart';
 
+/// Bu sayfa seçilen kategori değerini güncellemeyi sağlayan yapılar içerir.
 class UpdateCategoryPage extends ConsumerStatefulWidget {
   const UpdateCategoryPage({super.key});
 

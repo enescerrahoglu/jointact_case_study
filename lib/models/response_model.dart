@@ -1,3 +1,5 @@
+/// API yanıtlarını temsil eden [ResponseModel] sınıfı, yanıt verilerini, sonucu,
+/// mesajı ve başarılı olup olmadığını içeren bir yapı sunar.
 class ResponseModel {
   final dynamic data;
   final int result;

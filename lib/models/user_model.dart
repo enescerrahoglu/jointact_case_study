@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+/// Kullanıcıları temsil eden [UserModel] sınıfı, kullanıcı bilgilerini içeren
+/// ve JSON formatına dönüştürülebilen bir yapı sunar.
 class UserModel {
   final int id;
   String name;

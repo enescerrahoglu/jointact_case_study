@@ -8,7 +8,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// Bu sınıf, proje genelinde ortak olarak kullanılabilecek fonksiyonları içermektedir.
 class AppFunctions {
+  /// Bu fonksiyon kullanıcıya geri bildirim vermek için kullanılır. Toast mesajlardan farkı, daha çok kişiselleştirilebilir olması ve Toast mesajların aksine bir yenisi oluştuğunda bir öncekini otomatik olarak sonlandırır.
   static void showSnackbar(BuildContext context, String text,
       {Color? backgroundColor, IconData? icon, int duration = 2}) {
     final snackbar = SnackBar(
@@ -42,6 +44,7 @@ class AppFunctions {
       ..showSnackBar(snackbar);
   }
 
+  /// Bu fonksiyon kullanıcıya kamera ve galeriye erişmek için bir arayüz sunar ve belirlenen süre sonunda kaybolur.
   void showMediaSnackbar(BuildContext context, Function cameraFunction, Function galleryFunction) {
     final snackbar = SnackBar(
       shape: const RoundedRectangleBorder(
@@ -94,6 +97,7 @@ class AppFunctions {
       ..showSnackBar(snackbar);
   }
 
+  /// Bu fonksiyon cihaz galerisinden seçilen görseli File? tipinde geri döndürür.
   Future<File?> pickImageFromGallery() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
@@ -124,6 +128,7 @@ class AppFunctions {
     }
   }
 
+  /// Bu fonksiyon cihaz kamerası ile anlık çekilen görseli File? tipinde geri döndürür.
   Future<File?> pickImageFromCamera() async {
     try {
       await Permission.camera.request();
@@ -145,6 +150,7 @@ class AppFunctions {
     }
   }
 
+  /// Bu fonksiyon File tipindeki veriyi base64 olarak kodlar ve değeri String olarak geri döndürür.
   static String convertToBase64(File imageFile) {
     final bytes = imageFile.readAsBytesSync();
     final base64String = base64Encode(bytes);

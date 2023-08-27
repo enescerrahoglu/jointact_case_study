@@ -1,3 +1,5 @@
+/// Sipariş edilmiş öğeleri temsil eden [ItemModel] sınıfı, öğe bilgilerini içeren ve
+/// JSON formatına dönüştürülebilen bir yapı sunar.
 class ItemModel {
   int id;
   int orderId;

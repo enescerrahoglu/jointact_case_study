@@ -11,6 +11,10 @@ import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/user_repository.dart';
 import 'package:jointact_case_study/widgets/loading_widget.dart';
 
+/// Bu sayfa, kullanıcının uygulamada gezinme ve farklı bölümlere erişim sağlaması için tasarlanmıştır.
+///
+/// Kullanıcı, alt gezinme çubuğunu kullanarak Ana Sayfa, Sepet ve Profil sayfaları arasında
+/// geçiş yapabilir. Her sayfa kendi içeriğini barındırır ve kullanıcının isteğine göre etkileşimler sağlar.
 class NavigationPage extends ConsumerStatefulWidget {
   const NavigationPage({super.key});
 

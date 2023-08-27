@@ -9,6 +9,8 @@ import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/user_repository.dart';
 import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 
+/// Bu sayfada kullanıcı vermiş olduğu bir siparişe ait ürünlerin listesini görür.
+/// Tıklanan her bir ürün için detay sayfasına yönlendirilir.
 class OrderDetailPage extends ConsumerWidget {
   const OrderDetailPage({super.key});
 

@@ -15,6 +15,7 @@ import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 import 'package:jointact_case_study/widgets/dropdown_item_widget.dart';
 import 'package:jointact_case_study/widgets/loading_widget.dart';
 
+/// Bu sayfa yeni bir ürün eklemek için gerekli yapıları içerir.
 class CreateProductPage extends ConsumerStatefulWidget {
   const CreateProductPage({super.key});
 

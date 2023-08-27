@@ -5,6 +5,7 @@ import 'package:jointact_case_study/helpers/ui_helper.dart';
 import 'package:jointact_case_study/models/currency_model.dart';
 import 'package:jointact_case_study/models/product_model.dart';
 
+/// Bu sınıf admin için kişiselleştirilmiş ürün widgetı sunar.
 class ProductGridItem extends StatelessWidget {
   final ProductModel product;
   final Function()? onTap;

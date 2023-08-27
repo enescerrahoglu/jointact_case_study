@@ -6,6 +6,18 @@ import 'dart:convert';
 import 'package:jointact_case_study/models/response_model.dart';
 import 'package:flutter/material.dart';
 
+/// Bu sınıf, yönetici tarafından yapılabilecek veritabanı işlemlerini yönetir ve ilgili verilerin alınması, oluşturulması,
+/// güncellenmesi ve silinmesini sağlar. Ürün kategorileri, ürünler ve para birimleri gibi model sınıfları üzerinde işlemler yapılır.
+///
+/// Temel Fonksiyonlar:
+///
+/// - Kategori İşlemleri: Kategori listesi alınabilir, yeni kategori oluşturulabilir, mevcut kategori güncellenebilir,
+///   ve kategori silinebilir.
+/// - Ürün İşlemleri: Ürün listesi alınabilir, yeni ürün oluşturulabilir, mevcut ürün güncellenebilir, ve ürün silinebilir.
+/// - Para Birimi İşlemleri: Para birimi listesi alınabilir.
+///
+/// Tüm veritabanı işlemleri HTTP istekleri kullanılarak gerçekleştirilir ve gerekli güncellemeler yapıldığında `notifyListeners()` çağrısı
+/// kullanılarak değişiklikler bildirilir ve kullanılan yerlerde yapının güncellenmesi sağlanır.
 class AdminRepository extends ChangeNotifier {
   final String _baseURL = 'https://api.jointact.com';
   final String _devKey = '833F0ACB-49F7-451C-A0C7-1EA68FDC5B6B';

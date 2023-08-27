@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jointact_case_study/constants/color_constants.dart';
 import 'package:jointact_case_study/helpers/ui_helper.dart';
 
+/// Bu widget classı kişiselleştirilmiş bir Button oluşturmayı sağlar.
 class ButtonComponent extends StatefulWidget {
   final String text;
   final Color foregroundColor;

@@ -1,5 +1,7 @@
 import 'package:jointact_case_study/models/item_model.dart';
 
+/// Siparişleri temsil eden [OrderModel] sınıfı, sipariş bilgilerini içeren ve
+/// JSON formatına dönüştürülebilen bir yapı sunar.
 class OrderModel {
   int id;
   String time;

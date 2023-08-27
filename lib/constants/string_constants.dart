@@ -1,3 +1,5 @@
+/// Bu sınıf, projenin çoklu dil desteğini sunmasına olanak sağlayan her bir string ifadesine ait key değerlerini tutmaktadır.
+/// lib > localization > languages klasöründe yer alan her bir dile ait json dosyasında bu keylerin o dildeki karşılıkları yer almaktadır.
 class StringKeys {
   static String admin = 'admin';
   static String user = 'user';

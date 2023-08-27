@@ -12,6 +12,9 @@ import 'package:jointact_case_study/repositories/admin_repository.dart';
 import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 import 'package:jointact_case_study/widgets/loading_widget.dart';
 
+/// Bu sayfa eklenen bütün kategorilerin listelemektedir.
+/// Listelenen kategorilere tıklanarak o kategori için güncelleme sayfasına yönlendirme sağlanır.
+/// Yeni kategori ekleme sayfasına bir FloatingActionButton yardımıyla gidilir.
 class CategoriesPage extends ConsumerStatefulWidget {
   const CategoriesPage({super.key});
 

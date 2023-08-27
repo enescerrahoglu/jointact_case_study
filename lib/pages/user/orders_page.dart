@@ -9,6 +9,9 @@ import 'package:jointact_case_study/providers/providers.dart';
 import 'package:jointact_case_study/repositories/user_repository.dart';
 import 'package:jointact_case_study/widgets/app_bar_widget.dart';
 
+/// Bu sayfada kullanıcı vermiş olduğu siparişlerin listesini görüntüler.
+/// Her bir sipariş satırı için siparişin gerçekleştiği tarih ve saat bilgisi yer alır.
+/// Tıklanan her bir sipariş için detay sayfasına yönlendirilir.
 class OrdersPage extends ConsumerStatefulWidget {
   const OrdersPage({super.key});
 

@@ -12,6 +12,16 @@ import 'package:jointact_case_study/pages/admin/products_page.dart';
 import 'package:jointact_case_study/pages/redirect_page.dart';
 import 'package:jointact_case_study/pages/settings_page.dart';
 
+/// Bu sınıf, yönetici panelinde kullanılan gezinme çekmecesini oluşturur.
+/// Kullanıcının farklı sayfalara yönlendirilmesini sağlar.
+///
+/// Temel İşlevler:
+///
+/// - Kullanıcı Profili: Kullanıcının profil resmini ve adını gösterir.
+/// - Menü Öğeleri: Kategori, ürün, ayarlar ve çıkış gibi sayfalara yönlendirme yapar.
+///
+/// [ConsumerWidget], Riverpod paketinin bir parçasıdır ve widget'in
+/// değişen verilere (örneğin, sağlayıcılardan gelen verilere) yanıt vermesini sağlar.
 class AdminNavigationDrawer extends ConsumerWidget {
   const AdminNavigationDrawer({super.key});
 
