@@ -47,7 +47,7 @@ class _VerifyPageState extends State<VerifyPage> {
               ButtonComponent(
                 text: getTranslated(context, StringKeys.verify),
                 isWide: true,
-                onPressed: devKeyTextEditingController.text.isEmpty
+                onPressed: devKeyTextEditingController.text.trim().isEmpty
                     ? null
                     : () async {
                         if (devKeyTextEditingController.text == "833F0ACB-49F7-451C-A0C7-1EA68FDC5B6B") {
