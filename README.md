@@ -1,5 +1,3 @@
-# Bu proje işe alım sürecinde talep edilen vaka kapsamında ofis.work adına geliştirilmiştir.
-
 Projeye ait ekran kaydını ve ekran görüntülerini aşağıda bulabilirsiniz.
 
 [![Watch the video](https://firebasestorage.googleapis.com/v0/b/paylash-app.appspot.com/o/user_register_app%2Fclick_for_play.png?alt=media&token=3bff6c74-ac7c-401f-b40c-fda8f91c2bd9)](https://firebasestorage.googleapis.com/v0/b/enes-cerrahoglu.appspot.com/o/JointActCaseStudy%2FScreen_Recording_20230827_153242.mp4?alt=media&token=6d5b0186-c59a-4f39-bc3f-49eca4efefc9)
